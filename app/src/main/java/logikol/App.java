@@ -3,9 +3,10 @@
  */
 package logikol;
 
-
-import logikol.MainPane;
-import logikol.ToolsPane;
+import Gates.AND;
+import Gates.BasicGate;
+import Gates.NOT;
+import Gates.OR;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -13,31 +14,57 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class App extends Application {
+public class App /*extends Application*/ {
 
     int width = 1280;
     int height = 720;
 
-
-    @Override
+    /*@Override
     public void start(Stage stage) {
 
         ToolsPane toolsPane = new ToolsPane("Logic Gates");
-        
+
         toolsPane.setBorderColor(Color.RED);
         toolsPane.setWidth(200);
+        toolsPane.addButton("not");
+        toolsPane.addButton("and");
+        toolsPane.addButton("or");
+
         MainPane mainPane = new MainPane();
 
         mainPane.pane.setLeft(toolsPane.getToolsBox());
 
         Scene scene = new Scene(mainPane.pane, width, height);
 
-        
         stage.setScene(scene);
         stage.show();
-    }
+    } */
 
     public static void main(String[] args) {
-        launch();
+        // launch();
+     
+        try{
+            BasicGate and = new AND();
+            BasicGate and2 = new AND();
+            NOT not = new NOT();
+            BasicGate or = new OR();
+
+            int a = 0;
+            int b = 0;
+
+            System.out.println(and2.in(or.in(a, b).out(), not.in(and.in(a, b).out()).out()).out());
+            a = 0; b = 1;
+            System.out.println(and2.in(or.in(a, b).out(), not.in(and.in(a, b).out()).out()).out());
+            a = 1; b = 0;
+            System.out.println(and2.in(or.in(a, b).out(), not.in(and.in(a, b).out()).out()).out());
+            a = 1; b = 1;
+            System.out.println(and2.in(or.in(a, b).out(), not.in(and.in(a, b).out()).out()).out());
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }        
+
     }
 }
