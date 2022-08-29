@@ -10,8 +10,6 @@ import java.util.HashMap;
 
 public final class CompoundGate extends BasicGateMultiIn {
 
-
-
     private String name;
     private List<BasicGate> gates;
     private Map<Integer, BasicGate> gatesNamesMap;
@@ -47,11 +45,5 @@ public final class CompoundGate extends BasicGateMultiIn {
     {
         return false;
     }
-
-   
-
-
-
-    
     
 }

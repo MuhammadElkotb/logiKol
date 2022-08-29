@@ -17,30 +17,44 @@ import Gates.BasicGateSingleIn;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
-public class App /*extends Application*/ {
+import javafx.scene.shape.Circle;
+
+public class App extends Application {
 
     int width = 1280;
     int height = 720;
 
-   /* @Override
+    @Override
     public void start(Stage stage) {
 
-        Canvas canvas = new Canvas(width, height);
-
-        Pane pane = new Pane();
-        pane.getChildren().addAll(canvas);
-        Scene scene = new Scene(pane, width, height);
+        Group root = new Group();
+        Circle circle = new Circle(50, 50, 15);
+        circle.setFill(Color.GREEN);
+        root.getChildren().add(circle);
+        Scene scene = new Scene(root, width, height);
+        scene.setFill(Color.WHITE);
         stage.setScene(scene);
+
+        scene.setOnMouseMoved(e -> {
+            circle.setFill(Color.BLACK);
+            circle.setCenterX(e.getSceneX());
+            circle.setCenterY(e.getSceneY());
+        });
+        
         stage.show();
-    }*/
+    }
 
     public static void main(String[] args) {
-        //launch();
+        launch();
         Input input1 = new Input(false);
         Input input2 = new Input(true);
         BasicGateMultiIn and1 = new AND(input1, input2);
