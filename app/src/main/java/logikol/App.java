@@ -3,14 +3,22 @@
  */
 package logikol;
 
+
 import Gates.AND;
 import Gates.BasicGate;
 import Gates.NOT;
 import Gates.OR;
+import Gates.Source;
+import Gates.CompoundGate;
+import Gates.Input;
+import Gates.BasicGateMultiIn;
+import Gates.BasicGateSingleIn;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -19,52 +27,36 @@ public class App /*extends Application*/ {
     int width = 1280;
     int height = 720;
 
-    /*@Override
+   /* @Override
     public void start(Stage stage) {
 
-        ToolsPane toolsPane = new ToolsPane("Logic Gates");
+        Canvas canvas = new Canvas(width, height);
 
-        toolsPane.setBorderColor(Color.RED);
-        toolsPane.setWidth(200);
-        toolsPane.addButton("not");
-        toolsPane.addButton("and");
-        toolsPane.addButton("or");
-
-        MainPane mainPane = new MainPane();
-
-        mainPane.pane.setLeft(toolsPane.getToolsBox());
-
-        Scene scene = new Scene(mainPane.pane, width, height);
-
+        Pane pane = new Pane();
+        pane.getChildren().addAll(canvas);
+        Scene scene = new Scene(pane, width, height);
         stage.setScene(scene);
         stage.show();
-    } */
+    }*/
 
     public static void main(String[] args) {
-        // launch();
-     
-        try{
-            BasicGate and = new AND();
-            BasicGate and2 = new AND();
-            NOT not = new NOT();
-            BasicGate or = new OR();
+        //launch();
+        Input input1 = new Input(false);
+        Input input2 = new Input(true);
+        BasicGateMultiIn and1 = new AND(input1, input2);
+        BasicGateMultiIn or = new OR(input1, input2);
+        BasicGateSingleIn not = new NOT(and1);
+        BasicGateMultiIn and2 = new AND(or, not);
 
-            int a = 0;
-            int b = 0;
+        BasicGateSingleIn node = new Source(and2);
 
-            System.out.println(and2.in(or.in(a, b).out(), not.in(and.in(a, b).out()).out()).out());
-            a = 0; b = 1;
-            System.out.println(and2.in(or.in(a, b).out(), not.in(and.in(a, b).out()).out()).out());
-            a = 1; b = 0;
-            System.out.println(and2.in(or.in(a, b).out(), not.in(and.in(a, b).out()).out()).out());
-            a = 1; b = 1;
-            System.out.println(and2.in(or.in(a, b).out(), not.in(and.in(a, b).out()).out()).out());
-
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }        
+        System.out.println(node.process());
+        input1.setValue(true); input2.setValue(false);
+        System.out.println(node.process());
+        input1.setValue(true); input2.setValue(true);
+        System.out.println(node.process());
+        input1.setValue(false); input2.setValue(false);
+        System.out.println(node.process());
 
     }
 }

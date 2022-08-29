@@ -1,22 +1,35 @@
 package Gates;
 
-public class AND extends BasicGate {
+import java.util.ArrayList;
+import java.util.List;
 
-    public AND(){}
+public final class AND extends BasicGateMultiIn {
 
-    public AND(int... args) throws Exception
-    {
-        super(args);
-    }
 
-    public AND(boolean... args) throws Exception
+    
+    public AND(BasicGate... args)
     {
-        super(args);
+        this.in = new ArrayList<BasicGate>();
+        for(BasicGate arg : args)
+        {
+            this.in.add(arg);
+        }
     }
-    public boolean out()
+    public AND(List<BasicGate> gates)
     {
-        return this.zeroes <= 0;
+        this.in = new ArrayList<BasicGate>();
+        this.in = gates;
     }
+    @Override
+    public boolean process()
+    {
+        for(BasicGate arg : this.in)
+        {
+            if(!arg.process()) return false; 
+        }
+        return true;
+    }
+    
 }
 
 
