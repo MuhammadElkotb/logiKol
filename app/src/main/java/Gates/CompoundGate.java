@@ -43,6 +43,11 @@ public final class CompoundGate extends BasicGateMultiIn {
         return false;
     }
 
+    public boolean getValue()
+    {
+        return false;
+    }
+
    
 
 

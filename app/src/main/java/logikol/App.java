@@ -49,13 +49,18 @@ public class App /*extends Application*/ {
         BasicGateMultiIn and2 = new AND(or, not);
 
         BasicGateSingleIn node = new Source(and2);
-
         System.out.println(node.process());
+        
         input1.setValue(true); input2.setValue(false);
+        and1.reset(); and2.reset(); or.reset(); not.reset();
         System.out.println(node.process());
+
         input1.setValue(true); input2.setValue(true);
+        and1.reset(); and2.reset(); or.reset(); not.reset();
         System.out.println(node.process());
+
         input1.setValue(false); input2.setValue(false);
+        and1.reset(); and2.reset(); or.reset(); not.reset();
         System.out.println(node.process());
 
     }

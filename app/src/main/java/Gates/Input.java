@@ -19,9 +19,16 @@ public class Input implements BasicGate{
         this.value = !this.value;
         return this.value;
     }
+
+    public boolean getValue()
+    {
+        return this.process();
+    }
+
     public boolean process()
     {
         return this.value;
     }
+
     
 }

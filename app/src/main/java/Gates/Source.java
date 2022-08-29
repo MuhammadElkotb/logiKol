@@ -6,11 +6,23 @@ public class Source extends BasicGateSingleIn {
     {
         this.in = gate;
     }
+
+    public boolean getValue()
+    {
+        if(this.processed == true) return this.value;
+        return this.process();
+    }
     public boolean process()
     {
-        return this.in.process();    
+        if(this.in == null) {
+            this.processed = true;
+            this.value = false;
+            return false;
+        }
+        boolean out = this.in.process();
+        this.processed = true;
+        this.value = out;
+        return out;    
     }
-
- 
     
 }

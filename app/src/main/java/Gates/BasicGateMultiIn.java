@@ -3,6 +3,9 @@ package Gates;
 import java.util.List;
 
 public abstract class BasicGateMultiIn implements BasicGate {
+
+    protected boolean processed = false;
+    protected boolean value;
     protected List<BasicGate> in;
     
     public void addIn(BasicGate gate)
@@ -16,6 +19,10 @@ public abstract class BasicGateMultiIn implements BasicGate {
     public List<BasicGate> getIn()
     {
         return this.in;
+    }
+    public void reset()
+    {
+        this.processed = false;
     }
 }
 
