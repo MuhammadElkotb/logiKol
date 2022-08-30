@@ -9,6 +9,7 @@ import Gates.BasicGate;
 import Gates.NOT;
 import Gates.OR;
 import Gates.Source;
+import UIObjects.InputObject;
 import Gates.CompoundGate;
 import Gates.Input;
 import Gates.BasicGateMultiIn;
@@ -37,45 +38,28 @@ public class App extends Application {
     public void start(Stage stage) {
 
         Group root = new Group();
-        Circle circle = new Circle(50, 50, 15);
-        circle.setFill(Color.GREEN);
-        root.getChildren().add(circle);
+
+        Input input1 = new Input(false);
+        Input input2 = new Input(true);
+        
+        InputObject input1UI = new InputObject(root, input1, 50, 70);
+        InputObject input2UI = new InputObject(root, input2, 200, 300);
+
+
         Scene scene = new Scene(root, width, height);
         scene.setFill(Color.WHITE);
         stage.setScene(scene);
 
-        scene.setOnMouseMoved(e -> {
-            circle.setFill(Color.BLACK);
-            circle.setCenterX(e.getSceneX());
-            circle.setCenterY(e.getSceneY());
-        });
         
+        scene.setOnMouseClicked(e -> {
+            input1UI.move(e.getSceneX(), e.getSceneY());
+        });
         stage.show();
     }
 
     public static void main(String[] args) {
         launch();
-        Input input1 = new Input(false);
-        Input input2 = new Input(true);
-        BasicGateMultiIn and1 = new AND(input1, input2);
-        BasicGateMultiIn or = new OR(input1, input2);
-        BasicGateSingleIn not = new NOT(and1);
-        BasicGateMultiIn and2 = new AND(or, not);
-
-        BasicGateSingleIn node = new Source(and2);
-        System.out.println(node.process());
         
-        input1.setValue(true); input2.setValue(false);
-        and1.reset(); and2.reset(); or.reset(); not.reset();
-        System.out.println(node.process());
-
-        input1.setValue(true); input2.setValue(true);
-        and1.reset(); and2.reset(); or.reset(); not.reset();
-        System.out.println(node.process());
-
-        input1.setValue(false); input2.setValue(false);
-        and1.reset(); and2.reset(); or.reset(); not.reset();
-        System.out.println(node.process());
 
     }
 }
