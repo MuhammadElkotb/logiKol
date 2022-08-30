@@ -59,14 +59,21 @@ public class App extends Application {
 
 
 
-        imageViewAND.setX(500);
-        imageViewAND.setY(500);
+     
+        imageViewNOT.setOnMouseDragged(e -> {
+            imageViewNOT.setX(e.getSceneX() + imageViewNOT.getFitWidth());
+            imageViewNOT.setY(e.getSceneY() + imageViewNOT.getFitHeight());
+        });
 
-        imageViewOR.setX(200);
-        imageViewOR.setY(200);
+        imageViewOR.setOnMouseDragged(e -> {
+            imageViewOR.setX(e.getSceneX() + imageViewOR.getFitWidth());
+            imageViewOR.setY(e.getSceneY() + imageViewOR.getFitHeight());
+        });
 
-        imageViewOR.setX(600);
-        imageViewOR.setY(600);
+        imageViewAND.setOnMouseDragged(e -> {
+            imageViewAND.setX(e.getSceneX() + imageViewAND.getFitWidth());
+            imageViewAND.setY(e.getSceneY() + imageViewAND.getFitHeight());
+        });
 
 
         Scene scene = new Scene(root, width, height);
