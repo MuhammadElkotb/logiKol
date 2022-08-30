@@ -11,25 +11,31 @@ import javafx.scene.shape.Circle;
 import org.checkerframework.checker.units.qual.C;
 
 import Gates.BasicGate;
-public class InputObject extends MoveAbleUIObject{
+
+
+public class InputObject extends BasicGateUIObject {
 
     public Circle circle;
     private Input input;
-    private IONode outNode;
-    private boolean drag = false;
 
-    public InputObject(Parent root, Input input, double centerX, double centerY)
+    public InputObject(Group root, BasicGate input, IONode outNode, double centerX, double centerY)
     {
-        this.input = input;
+        super(root, input, outNode);
+        System.out.println("After super");
+        this.input = (Input)input;
+        System.out.println("After cast");
+
         this.circle = new Circle(centerX, centerY, 15);
         this.circle.setStroke(Color.BLACK);
         this.updateColor();
+        System.out.println("After update");
 
-        this.outNode = new IONode();
         this.outNode.move(this.circle.getCenterX() + this.circle.getRadius(), 
                     this.circle.getCenterY() - (this.outNode.node.getHeight() / 2));
         
-        ((Group)root).getChildren().addAll(this.circle, this.outNode.node);  
+        System.out.println("After move");
+
+        this.root.getChildren().add(this.circle);  
 
 
         this.circle.setOnMouseDragged(e -> {
@@ -42,7 +48,6 @@ public class InputObject extends MoveAbleUIObject{
                 this.toggle();
             }
         });
-
     }
 
     public void move(double centerX, double centerY)
@@ -51,6 +56,7 @@ public class InputObject extends MoveAbleUIObject{
         this.circle.setCenterY(centerY);
         this.outNode.move(centerX + this.circle.getRadius(), centerY - this.outNode.node.getHeight() / 2);
     }
+
 
     public void updateColor()
     {
@@ -67,5 +73,12 @@ public class InputObject extends MoveAbleUIObject{
     {
         this.input.toggle();
         this.updateColor();
+    }
+
+    public void setRoot(Group root)
+    {
+        this.root = root;
+        root.getChildren().add(this.circle);
+        this.outNode.setRoot(root);
     }
 }

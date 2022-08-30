@@ -11,3 +11,4 @@ offline.mode=false
 override.workspace.settings=true
 show.console.view=true
 show.executions.view=true
+org.eclipse.jdt.core.compiler.problem.unusedImport=ignore

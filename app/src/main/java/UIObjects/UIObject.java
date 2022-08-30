@@ -1,7 +1,10 @@
 package UIObjects;
 
+import javafx.scene.Group;
+
 public interface UIObject {
 
-    public void move(double x, double y);
+    public Group getRoot();
+    public void setRoot(Group root);
     
 }

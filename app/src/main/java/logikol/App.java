@@ -9,6 +9,7 @@ import Gates.BasicGate;
 import Gates.NOT;
 import Gates.OR;
 import Gates.Source;
+import UIObjects.IONode;
 import UIObjects.InputObject;
 import Gates.CompoundGate;
 import Gates.Input;
@@ -44,9 +45,16 @@ public class App extends Application {
 
         Input input1 = new Input(false);
         Input input2 = new Input(true);
-        
-        InputObject input1UI = new InputObject(root, input1, 50, 70);
-        InputObject input2UI = new InputObject(root, input2, 200, 300);
+
+        System.out.println("lol");
+
+        IONode outNode1 = new IONode(root);
+        IONode outNode2 = new IONode(root);
+
+        System.out.println(outNode1);
+
+        InputObject input1UI = new InputObject(root, input1, outNode1, 50, 70);
+        InputObject input2UI = new InputObject(root, input2, outNode2, 200, 300);
 
         Image imageAND = new Image("gates3-and.png");
         Image imageOR = new Image("gates3-or.png");
@@ -58,21 +66,19 @@ public class App extends Application {
         ImageView imageViewNOT = new ImageView(imageNOT);
 
 
-
-     
         imageViewNOT.setOnMouseDragged(e -> {
-            imageViewNOT.setX(e.getSceneX() + imageViewNOT.getFitWidth());
-            imageViewNOT.setY(e.getSceneY() + imageViewNOT.getFitHeight());
+            imageViewNOT.setX(e.getSceneX() - imageNOT.getWidth() / 2);
+            imageViewNOT.setY(e.getSceneY() - imageNOT.getHeight()/ 2);
         });
 
         imageViewOR.setOnMouseDragged(e -> {
-            imageViewOR.setX(e.getSceneX() + imageViewOR.getFitWidth());
-            imageViewOR.setY(e.getSceneY() + imageViewOR.getFitHeight());
+            imageViewOR.setX(e.getSceneX() - imageOR.getWidth() / 2);
+            imageViewOR.setY(e.getSceneY() - imageOR.getHeight() / 2);
         });
 
         imageViewAND.setOnMouseDragged(e -> {
-            imageViewAND.setX(e.getSceneX() + imageViewAND.getFitWidth());
-            imageViewAND.setY(e.getSceneY() + imageViewAND.getFitHeight());
+            imageViewAND.setX(e.getSceneX() - imageAND.getWidth() / 2);
+            imageViewAND.setY(e.getSceneY() - imageAND.getHeight() / 2);
         });
 
 
