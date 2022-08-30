@@ -18,6 +18,9 @@ import Gates.BasicGateSingleIn;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.effect.Effect;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Group;
@@ -45,15 +48,34 @@ public class App extends Application {
         InputObject input1UI = new InputObject(root, input1, 50, 70);
         InputObject input2UI = new InputObject(root, input2, 200, 300);
 
+        Image imageAND = new Image("gates3-and.png");
+        Image imageOR = new Image("gates3-or.png");
+        Image imageNOT = new Image("gates3-not.png");
+
+
+        ImageView imageViewAND = new ImageView(imageAND);
+        ImageView imageViewOR = new ImageView(imageOR);
+        ImageView imageViewNOT = new ImageView(imageNOT);
+
+
+
+        imageViewAND.setX(500);
+        imageViewAND.setY(500);
+
+        imageViewOR.setX(200);
+        imageViewOR.setY(200);
+
+        imageViewOR.setX(600);
+        imageViewOR.setY(600);
+
 
         Scene scene = new Scene(root, width, height);
         scene.setFill(Color.WHITE);
         stage.setScene(scene);
 
+        root.getChildren().addAll(imageViewAND, imageViewNOT, imageViewOR);
         
-        scene.setOnMouseClicked(e -> {
-            input1UI.move(e.getSceneX(), e.getSceneY());
-        });
+       
         stage.show();
     }
 

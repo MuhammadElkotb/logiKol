@@ -27,8 +27,7 @@ public class InputObject {
         }
 
         this.outNode = new IONode();
-
-        this.outNode.update(this.circle.getCenterX() + this.circle.getRadius(), 
+        this.outNode.move(this.circle.getCenterX() + this.circle.getRadius(), 
                     this.circle.getCenterY() - (this.outNode.node.getHeight() / 2));
         
         ((Group)root).getChildren().addAll(this.circle, this.outNode.node);  
@@ -41,6 +40,6 @@ public class InputObject {
     {
         this.circle.setCenterX(centerX);
         this.circle.setCenterY(centerY);
-        this.outNode.update(centerX + this.circle.getRadius(), centerY - this.outNode.node.getHeight() / 2);
+        this.outNode.move(centerX + this.circle.getRadius(), centerY - this.outNode.node.getHeight() / 2);
     }
 }
