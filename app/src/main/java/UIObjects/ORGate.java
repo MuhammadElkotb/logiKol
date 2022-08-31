@@ -14,17 +14,34 @@ public class ORGate extends BasicGateMultiInUI {
 
         this.texture = texture;
 
-        this.texture.setScaleX(0.2);
-        this.texture.setScaleY(0.2);
         this.texture.setX(x);
         this.texture.setY(y);
 
-        this.outNode.move(x + this.texture.getImage().getWidth(), y + this.texture.getImage().getHeight() / 2);
+        this.outNode.move(x + this.texture.getImage().getWidth(), y + this.texture.getImage().getHeight() / 2 + 0.3);
 
-        this.inNode1.move(x, y);
-        this.inNode2.move(x, y + this.texture.getImage().getHeight());
-        this.root.getChildren().add(this.texture);
+        this.inNode1.move(x, y + 14);
+        this.inNode2.move(x, y + this.texture.getImage().getHeight() - 15);
         
+
+
+        texture.setOnMouseDragged(e -> {
+
+            
+            texture.setX(e.getSceneX() - texture.getImage().getWidth() / 2);
+            texture.setY(e.getSceneY() - texture.getImage().getHeight() / 2);
+
+
+            this.outNode.move(texture.getX() + this.texture.getImage().getWidth(), texture.getY() + 
+                                this.texture.getImage().getHeight() / 2 + 0.3);
+
+           
+            this.inNode1.move(this.texture.getX(), this.texture.getY() + 14);
+            this.inNode2.move(this.texture.getX(), this.texture.getY() + this.texture.getImage().getHeight() - 15);
+
+        });
+
+        this.root.getChildren().add(this.root.getChildren().size() - 3, this.texture);
+
     }
 
 

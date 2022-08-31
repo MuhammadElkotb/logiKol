@@ -24,7 +24,7 @@ public class InputNode extends BasicGateUI {
         this.updateColor();
 
         this.outNode.move(this.circle.getCenterX() + this.circle.getRadius(), 
-                    this.circle.getCenterY() - (this.outNode.node.getHeight() / 2));
+                    this.circle.getCenterY() - (this.circle.getRadius() / 2));
         
 
         this.root.getChildren().add(this.circle);  
@@ -40,7 +40,7 @@ public class InputNode extends BasicGateUI {
     {
         this.circle.setCenterX(centerX);
         this.circle.setCenterY(centerY);
-        this.outNode.move(centerX + this.circle.getRadius(), centerY - this.outNode.node.getHeight() / 2);
+        this.outNode.move(centerX + this.circle.getRadius(), centerY - this.circle.getRadius() / 2);
     }
 
 

@@ -48,20 +48,22 @@ public class App extends Application {
         Group root = new Group();
 
 
-        InputNode input1UI = new InputNode(root, new Input(false), new IONode(root), 50, 70);
+        InputNode input1UI = new InputNode(root, new Input(false), new IONode(root), 100, 100);
         InputNode input2UI = new InputNode(root, new Input(true), new IONode(root), 200, 300);
 
 
 
         try
         {
-            Image imageOR = new Image("ornew.png");
+            Image imageOR = new Image("ornew1.png");
 
-            Image imageAND = new Image("andnew2.png");
+            Image imageAND = new Image("andnew1.png");
 
 
             ANDGate andGateUI1 = new ANDGate(root, new AND(), new IONode(root), new IONode(root), new IONode(root), new ImageView(imageAND), 300, 300);
             ORGate orGate1 = new ORGate(root, new OR(), new IONode(root), new IONode(root), new IONode(root), new ImageView(imageOR), 500, 500);
+            ANDGate andGateUI2 = new ANDGate(root, new AND(), new IONode(root), new IONode(root), new IONode(root), new ImageView(imageAND), 300, 300);
+
         }
         catch(Exception e)
         {

@@ -4,11 +4,12 @@ import javafx.scene.Parent;
 import javafx.scene.Group;
 
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 public class IONode extends MoveAbleUI{
-    public Rectangle node;
+    public Circle node;
     private Line lineFromNode = null;
     private boolean dragging = false;
     private BasicGateUI gate;
@@ -18,20 +19,22 @@ public class IONode extends MoveAbleUI{
 
         super(root);
 
-        this.node = new Rectangle(8, 8);
-        this.node.setFill(Color.BLUE);
+        this.node = new Circle(7);
+        this.node.setFill(Color.WHITE);
         this.node.setStroke(Color.BLACK);
+        this.node.setStrokeWidth(3);
 
         this.node.setOnMouseDragged(e -> {
 
             if(lineFromNode == null)
             {
                 lineFromNode = new Line();
+                lineFromNode.setStrokeWidth(2.5);
                 this.root.getChildren().add(lineFromNode);
                 
             }
-            lineFromNode.setStartX(node.getX());
-            lineFromNode.setStartY(node.getY());
+            lineFromNode.setStartX(node.getCenterX());
+            lineFromNode.setStartY(node.getCenterY());
 
             lineFromNode.setEndX(e.getSceneX());
             lineFromNode.setEndY(e.getSceneY());
@@ -54,8 +57,8 @@ public class IONode extends MoveAbleUI{
 
     public void move(double x, double y)
     {
-        this.node.setX(x);
-        this.node.setY(y);
+        this.node.setCenterX(x);
+        this.node.setCenterY(y);
     } 
 
     public void setRoot(Group root)
