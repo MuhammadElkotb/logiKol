@@ -1,8 +1,8 @@
 package Gates;
 
-public class Source extends BasicGateSingleIn {
+public class Node extends BasicGateSingleIn {
 
-    public Source(BasicGate gate)
+    public Node(BasicGate gate)
     {
         this.in = gate;
     }

@@ -8,7 +8,8 @@ import Gates.AND;
 import Gates.BasicGate;
 import Gates.NOT;
 import Gates.OR;
-import Gates.Source;
+import Gates.Node;
+import UIObjects.ANDGateObject;
 import UIObjects.IONode;
 import UIObjects.InputObject;
 import Gates.CompoundGate;
@@ -48,45 +49,23 @@ public class App extends Application {
 
         System.out.println("lol");
 
-        IONode outNode1 = new IONode(root);
-        IONode outNode2 = new IONode(root);
 
-        System.out.println(outNode1);
 
-        InputObject input1UI = new InputObject(root, input1, outNode1, 50, 70);
-        InputObject input2UI = new InputObject(root, input2, outNode2, 200, 300);
+        InputObject input1UI = new InputObject(root, input1, new IONode(root), 50, 70);
+        InputObject input2UI = new InputObject(root, input2, new IONode(root), 200, 300);
 
-        Image imageAND = new Image("gates3-and.png");
+        Image imageAND = new Image("gates6-and.png");
         Image imageOR = new Image("gates3-or.png");
         Image imageNOT = new Image("gates3-not.png");
 
 
-        ImageView imageViewAND = new ImageView(imageAND);
-        ImageView imageViewOR = new ImageView(imageOR);
-        ImageView imageViewNOT = new ImageView(imageNOT);
-
-
-        imageViewNOT.setOnMouseDragged(e -> {
-            imageViewNOT.setX(e.getSceneX() - imageNOT.getWidth() / 2);
-            imageViewNOT.setY(e.getSceneY() - imageNOT.getHeight()/ 2);
-        });
-
-        imageViewOR.setOnMouseDragged(e -> {
-            imageViewOR.setX(e.getSceneX() - imageOR.getWidth() / 2);
-            imageViewOR.setY(e.getSceneY() - imageOR.getHeight() / 2);
-        });
-
-        imageViewAND.setOnMouseDragged(e -> {
-            imageViewAND.setX(e.getSceneX() - imageAND.getWidth() / 2);
-            imageViewAND.setY(e.getSceneY() - imageAND.getHeight() / 2);
-        });
-
-
+        ANDGateObject andGateUI1 = new ANDGateObject(root, new AND(), new IONode(root), new ImageView(imageAND), 300, 300);
+      
+        System.out.println(input1UI.getOutNode().getGate());
         Scene scene = new Scene(root, width, height);
         scene.setFill(Color.WHITE);
         stage.setScene(scene);
 
-        root.getChildren().addAll(imageViewAND, imageViewNOT, imageViewOR);
         
        
         stage.show();

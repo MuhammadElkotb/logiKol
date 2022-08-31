@@ -14,11 +14,7 @@ public class Input implements BasicGate{
     {
         this.value = value;
     }
-    public boolean toggle()
-    {
-        this.value = !this.value;
-        return this.value;
-    }
+
 
     public boolean getValue()
     {

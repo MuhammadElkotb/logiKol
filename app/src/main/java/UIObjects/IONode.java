@@ -9,9 +9,13 @@ import javafx.scene.shape.Rectangle;
 
 public class IONode extends MoveAbleUIObject{
     public Rectangle node;
+    private Line lineFromNode = null;
+    private boolean dragging = false;
+    private BasicGateUIObject gate;
 
     public IONode(Group root)
     {
+
         super(root);
 
         this.node = new Rectangle(8, 8);
@@ -19,18 +23,35 @@ public class IONode extends MoveAbleUIObject{
         this.node.setStroke(Color.BLACK);
 
         this.node.setOnMouseDragged(e -> {
-            Line line = new Line();
 
-            line.setStartX(node.getX());
-            line.setStartY(node.getY());
+            if(lineFromNode == null)
+            {
+                lineFromNode = new Line();
+                this.root.getChildren().add(lineFromNode);
+                
+            }
+            lineFromNode.setStartX(node.getX());
+            lineFromNode.setStartY(node.getY());
 
-            line.setEndX(e.getSceneX());
-            line.setEndY(e.getSceneY());
+            lineFromNode.setEndX(e.getSceneX());
+            lineFromNode.setEndY(e.getSceneY());
 
+            this.dragging = true;
+
+        });
+
+        this.node.setOnMouseReleased(e -> {
+            if(this.dragging)
+            {
+                this.root.getChildren().remove(lineFromNode);
+                lineFromNode = null;
+                this.dragging = false;
+            }
         });
 
         root.getChildren().add(this.node);
     }
+
     public void move(double x, double y)
     {
         this.node.setX(x);
@@ -43,4 +64,14 @@ public class IONode extends MoveAbleUIObject{
         this.root.getChildren().add(this.node);
     }
 
+
+    public void setGate(BasicGateUIObject gate)
+    {
+        this.gate = gate;
+    }
+
+    public BasicGateUIObject getGate()
+    {
+        return this.gate;
+    }
 }

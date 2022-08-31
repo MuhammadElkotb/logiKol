@@ -8,7 +8,6 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import org.checkerframework.checker.units.qual.C;
 
 import Gates.BasicGate;
 
@@ -16,38 +15,28 @@ import Gates.BasicGate;
 public class InputObject extends BasicGateUIObject {
 
     public Circle circle;
-    private Input input;
+    private BasicGate input;
 
     public InputObject(Group root, BasicGate input, IONode outNode, double centerX, double centerY)
     {
-        super(root, input, outNode);
-        System.out.println("After super");
-        this.input = (Input)input;
-        System.out.println("After cast");
+        super(root, outNode);
+        this.input = input;
 
         this.circle = new Circle(centerX, centerY, 15);
         this.circle.setStroke(Color.BLACK);
         this.updateColor();
-        System.out.println("After update");
 
         this.outNode.move(this.circle.getCenterX() + this.circle.getRadius(), 
                     this.circle.getCenterY() - (this.outNode.node.getHeight() / 2));
         
-        System.out.println("After move");
 
         this.root.getChildren().add(this.circle);  
-
 
         this.circle.setOnMouseDragged(e -> {
             this.move(e.getSceneX(), e.getSceneY());
         });
 
-        this.circle.setOnMouseClicked(e -> {
-            if(e.getButton() == MouseButton.SECONDARY)
-            {
-                this.toggle();
-            }
-        });
+  
     }
 
     public void move(double centerX, double centerY)
@@ -69,11 +58,7 @@ public class InputObject extends BasicGateUIObject {
             this.circle.setFill(Color.GREEN);
         }
     }
-    public void toggle()
-    {
-        this.input.toggle();
-        this.updateColor();
-    }
+
 
     public void setRoot(Group root)
     {

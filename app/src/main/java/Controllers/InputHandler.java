@@ -2,12 +2,18 @@ package Controllers;
 
 
 import UIObjects.UIObject;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 
 import java.util.List;
-import java.util.ArrayList;
 
 
-public class InputHandler {
-    List<UIObject> objects;
-     
+public abstract class InputHandler {
+
+
+    private Scene scene;
+    private Group root;
+
+    
+
 }
