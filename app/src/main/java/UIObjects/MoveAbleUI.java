@@ -2,10 +2,10 @@ package UIObjects;
 
 import javafx.scene.Group;
 
-public abstract class MoveAbleUIObject implements UIObject{
+public abstract class MoveAbleUI implements UIObject{
 
     Group root;
-    public MoveAbleUIObject(Group root)
+    public MoveAbleUI(Group root)
     {
         this.root = root;
     }

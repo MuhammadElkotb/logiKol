@@ -4,14 +4,17 @@
 package logikol;
 
 
+import java.io.File;
+
 import Gates.AND;
 import Gates.BasicGate;
 import Gates.NOT;
 import Gates.OR;
 import Gates.Node;
-import UIObjects.ANDGateObject;
+import UIObjects.ANDGate;
 import UIObjects.IONode;
-import UIObjects.InputObject;
+import UIObjects.InputNode;
+import UIObjects.ORGate;
 import Gates.CompoundGate;
 import Gates.Input;
 import Gates.BasicGateMultiIn;
@@ -44,24 +47,31 @@ public class App extends Application {
 
         Group root = new Group();
 
-        Input input1 = new Input(false);
-        Input input2 = new Input(true);
 
-        System.out.println("lol");
-
+        InputNode input1UI = new InputNode(root, new Input(false), new IONode(root), 50, 70);
+        InputNode input2UI = new InputNode(root, new Input(true), new IONode(root), 200, 300);
 
 
-        InputObject input1UI = new InputObject(root, input1, new IONode(root), 50, 70);
-        InputObject input2UI = new InputObject(root, input2, new IONode(root), 200, 300);
 
-        Image imageAND = new Image("gates6-and.png");
-        Image imageOR = new Image("gates3-or.png");
-        Image imageNOT = new Image("gates3-not.png");
+        try
+        {
+            Image imageOR = new Image("ornew.png");
+
+            Image imageAND = new Image("andnew2.png");
 
 
-        ANDGateObject andGateUI1 = new ANDGateObject(root, new AND(), new IONode(root), new ImageView(imageAND), 300, 300);
+            ANDGate andGateUI1 = new ANDGate(root, new AND(), new IONode(root), new IONode(root), new IONode(root), new ImageView(imageAND), 300, 300);
+            ORGate orGate1 = new ORGate(root, new OR(), new IONode(root), new IONode(root), new IONode(root), new ImageView(imageOR), 500, 500);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+       
+
+
+       
       
-        System.out.println(input1UI.getOutNode().getGate());
         Scene scene = new Scene(root, width, height);
         scene.setFill(Color.WHITE);
         stage.setScene(scene);

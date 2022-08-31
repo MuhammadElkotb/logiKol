@@ -5,43 +5,47 @@ import Gates.BasicGate;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 
-public class ANDGateObject extends BasicGateUIObject{
+public class ANDGate extends BasicGateMultiInUI{
 
 
     private ImageView texture;
-    private BasicGate gate;
-    private IONode[] inNodes;
-    public ANDGateObject(Group root, BasicGate gate, IONode outNode, ImageView texture, double x, double y)
+    
+    public ANDGate(Group root, BasicGate gate, IONode outNode, IONode inNode1, IONode inNode2, ImageView texture, double x, double y)
     {
-        super(root, outNode);
-        this.gate = gate;
+        super(root, gate, outNode, inNode1, inNode2);
         this.texture = texture;
 
         this.texture.setX(x);
         this.texture.setY(y);
+;
+
+        System.out.println(this.texture.getFitHeight());
+        System.out.println(this.texture.getFitWidth());
+
 
         this.outNode.move(x + this.texture.getImage().getWidth() - 1, y + this.texture.getImage().getHeight() / 2 - 5);
 
-        
-        this.inNodes = new IONode[2];
-        this.inNodes[0] = new IONode(root);
-        this.inNodes[1] = new IONode(root);
 
-        this.inNodes[0].move(texture.getX() - this.inNodes[0].node.getWidth(), texture.getY() + 11);
-        this.inNodes[1].move(texture.getX() - this.inNodes[1].node.getWidth(), texture.getY() + this.texture.getImage().getHeight() - this.inNodes[1].node.getHeight() - 11);
+        this.inNode1.move(texture.getX() - this.inNode1.node.getWidth(), texture.getY() + 11);
+        this.inNode2.move(texture.getX() - this.inNode2.node.getWidth(), texture.getY() + this.texture.getImage().getHeight() - this.inNode2.node.getHeight() - 11);
 
 
 
         this.root.getChildren().addAll(texture);
 
         texture.setOnMouseDragged(e -> {
+
+            
             texture.setX(e.getSceneX() - texture.getImage().getWidth() / 2);
             texture.setY(e.getSceneY() - texture.getImage().getHeight() / 2);
             this.outNode.move(texture.getX() + this.texture.getImage().getWidth() - 1, 
                                 texture.getY() + this.texture.getImage().getHeight() / 2 - 5);
 
-            this.inNodes[0].move(texture.getX() - this.inNodes[0].node.getWidth(), texture.getY() + 11);
-            this.inNodes[1].move(texture.getX() - this.inNodes[1].node.getWidth(), texture.getY() + this.texture.getImage().getHeight() - this.inNodes[1].node.getHeight() - 11);
+           
+            this.inNode1.move(texture.getX() - this.inNode1.node.getWidth(), texture.getY() + 11);
+            this.inNode2.move(texture.getX() - this.inNode2.node.getWidth(), texture.getY() + this.texture.getImage().getHeight() - this.inNode2.node.getHeight() - 11);
+
+
         });
 
     }

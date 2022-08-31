@@ -1,5 +1,4 @@
 package UIObjects;
-import Gates.Input;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseButton;
 import javafx.event.Event;
@@ -12,15 +11,13 @@ import javafx.scene.shape.Circle;
 import Gates.BasicGate;
 
 
-public class InputObject extends BasicGateUIObject {
+public class InputNode extends BasicGateUI {
 
     public Circle circle;
-    private BasicGate input;
 
-    public InputObject(Group root, BasicGate input, IONode outNode, double centerX, double centerY)
+    public InputNode(Group root, BasicGate input, IONode outNode, double centerX, double centerY)
     {
-        super(root, outNode);
-        this.input = input;
+        super(root, input, outNode);
 
         this.circle = new Circle(centerX, centerY, 15);
         this.circle.setStroke(Color.BLACK);
@@ -49,7 +46,7 @@ public class InputObject extends BasicGateUIObject {
 
     public void updateColor()
     {
-        if(this.input.getValue() == false)
+        if(this.gate.getValue() == false)
         {
             this.circle.setFill(Color.RED);
         }

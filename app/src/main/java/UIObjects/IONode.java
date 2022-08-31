@@ -7,11 +7,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
-public class IONode extends MoveAbleUIObject{
+public class IONode extends MoveAbleUI{
     public Rectangle node;
     private Line lineFromNode = null;
     private boolean dragging = false;
-    private BasicGateUIObject gate;
+    private BasicGateUI gate;
 
     public IONode(Group root)
     {
@@ -65,12 +65,12 @@ public class IONode extends MoveAbleUIObject{
     }
 
 
-    public void setGate(BasicGateUIObject gate)
+    public void setGate(BasicGateUI gate)
     {
         this.gate = gate;
     }
 
-    public BasicGateUIObject getGate()
+    public BasicGateUI getGate()
     {
         return this.gate;
     }
