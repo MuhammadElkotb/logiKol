@@ -5,9 +5,8 @@ import javafx.scene.Group;
 public abstract class MoveAbleUI implements UIObject{
 
     Group root;
-    public MoveAbleUI(Group root)
+    public MoveAbleUI()
     {
-        this.root = root;
     }
     public abstract void move(double x, double y);
 
@@ -15,5 +14,6 @@ public abstract class MoveAbleUI implements UIObject{
     {
         return this.root;
     }
+
    
 }

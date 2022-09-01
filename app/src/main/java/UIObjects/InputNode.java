@@ -15,19 +15,17 @@ public class InputNode extends BasicGateUI {
 
     public Circle circle;
 
-    public InputNode(Group root, BasicGate input, IONode outNode, double centerX, double centerY)
+    public InputNode(IONode outNode, double centerX, double centerY)
     {
-        super(root, input, outNode);
+        super(outNode);
 
         this.circle = new Circle(centerX, centerY, 15);
-        this.circle.setStroke(Color.BLACK);
-        this.updateColor();
+        this.circle.setStroke(Color.RED);
 
         this.outNode.move(this.circle.getCenterX() + this.circle.getRadius(), 
                     this.circle.getCenterY() - (this.circle.getRadius() / 2));
         
 
-        this.root.getChildren().add(this.circle);  
 
         this.circle.setOnMouseDragged(e -> {
             this.move(e.getSceneX(), e.getSceneY());
@@ -44,18 +42,6 @@ public class InputNode extends BasicGateUI {
     }
 
 
-    public void updateColor()
-    {
-        if(this.gate.getValue() == false)
-        {
-            this.circle.setFill(Color.RED);
-        }
-        else
-        {
-            this.circle.setFill(Color.GREEN);
-        }
-    }
-
 
     public void setRoot(Group root)
     {
@@ -63,4 +49,6 @@ public class InputNode extends BasicGateUI {
         root.getChildren().add(this.circle);
         this.outNode.setRoot(root);
     }
+
+  
 }

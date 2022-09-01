@@ -1,14 +1,13 @@
 package UIObjects;
 
-import Gates.BasicGate;
 import javafx.scene.Group;
 
 public abstract class BasicGateSingleInUI extends BasicGateUI {
     
     private IONode inNode;
-    public BasicGateSingleInUI(Group root, BasicGate gate, IONode outNode, IONode inNode)
+    public BasicGateSingleInUI(IONode outNode, IONode inNode)
     {
-        super(root, gate, outNode);
+        super(outNode);
         this.inNode = inNode;
         this.inNode.setGate(this);
         

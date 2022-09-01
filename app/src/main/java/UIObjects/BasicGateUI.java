@@ -6,13 +6,10 @@ import Gates.BasicGate;
 public abstract class BasicGateUI extends MoveAbleUI {
 
     protected IONode outNode;
-    protected BasicGate gate;
 
-    public BasicGateUI(Group root, BasicGate gate, IONode outNode)
+    public BasicGateUI(IONode outNode)
     {   
-        super(root);
         this.outNode = outNode;
-        this.gate = gate;
         this.outNode.setGate(this);
     }
     public void setOutNode(IONode outNode)
@@ -23,6 +20,5 @@ public abstract class BasicGateUI extends MoveAbleUI {
     {
         return this.outNode;
     }
-
     
 }

@@ -8,29 +8,28 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
-public class IONode extends MoveAbleUI{
+public class IONode extends MoveAbleUI {
+
     public Circle node;
     private Line lineFromNode = null;
     private boolean dragging = false;
     private BasicGateUI gate;
 
-    public IONode(Group root)
+    public IONode()
     {
 
-        super(root);
 
         this.node = new Circle(7);
         this.node.setFill(Color.WHITE);
         this.node.setStroke(Color.BLACK);
         this.node.setStrokeWidth(3);
 
-        this.node.setOnMouseDragged(e -> {
+        /*this.node.setOnMouseDragged(e -> {
 
             if(lineFromNode == null)
             {
                 lineFromNode = new Line();
                 lineFromNode.setStrokeWidth(2.5);
-                this.root.getChildren().add(lineFromNode);
                 
             }
             lineFromNode.setStartX(node.getCenterX());
@@ -41,18 +40,17 @@ public class IONode extends MoveAbleUI{
 
             this.dragging = true;
 
-        });
+        });*/
 
-        this.node.setOnMouseReleased(e -> {
+        /*this.node.setOnMouseReleased(e -> {
             if(this.dragging)
             {
                 this.root.getChildren().remove(lineFromNode);
                 lineFromNode = null;
                 this.dragging = false;
             }
-        });
+        });*/
 
-        root.getChildren().add(this.node);
     }
 
     public void move(double x, double y)
@@ -77,4 +75,6 @@ public class IONode extends MoveAbleUI{
     {
         return this.gate;
     }
+
+   
 }

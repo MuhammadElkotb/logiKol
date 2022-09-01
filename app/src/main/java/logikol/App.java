@@ -10,8 +10,10 @@ import Gates.AND;
 import Gates.BasicGate;
 import Gates.NOT;
 import Gates.OR;
+import Providers.UIGateProvider;
 import Gates.Node;
 import UIObjects.ANDGate;
+import UIObjects.BasicGateUI;
 import UIObjects.IONode;
 import UIObjects.InputNode;
 import UIObjects.ORGate;
@@ -48,30 +50,21 @@ public class App extends Application {
         Group root = new Group();
 
 
-        InputNode input1UI = new InputNode(root, new Input(false), new IONode(root), 100, 100);
-        InputNode input2UI = new InputNode(root, new Input(true), new IONode(root), 200, 300);
-
-
-
         try
         {
-            Image imageOR = new Image("ornew1.png");
+            BasicGateUI andGate1 = UIGateProvider.buildGate("AND");
+            BasicGateUI andGate2 = UIGateProvider.buildGate("AND");
+            BasicGateUI orGate1 = UIGateProvider.buildGate("OR");
 
-            Image imageAND = new Image("andnew1.png");
 
-
-            ANDGate andGateUI1 = new ANDGate(root, new AND(), new IONode(root), new IONode(root), new IONode(root), new ImageView(imageAND), 300, 300);
-            ORGate orGate1 = new ORGate(root, new OR(), new IONode(root), new IONode(root), new IONode(root), new ImageView(imageOR), 500, 500);
-            ANDGate andGateUI2 = new ANDGate(root, new AND(), new IONode(root), new IONode(root), new IONode(root), new ImageView(imageAND), 300, 300);
-
+            andGate1.setRoot(root);
+            andGate2.setRoot(root);
+            orGate1.setRoot(root);
         }
         catch(Exception e)
         {
             System.out.println(e.getMessage());
         }
-       
-
-
        
       
         Scene scene = new Scene(root, width, height);
@@ -85,7 +78,5 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
-        
-
     }
 }
