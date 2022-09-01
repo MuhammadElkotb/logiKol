@@ -44,6 +44,7 @@ public class TextureProvider {
         return new ImageView(ORGate);
     }
 
+
     public ImageView getNOTGateTexture()
     {
         if(NOTGate == null)

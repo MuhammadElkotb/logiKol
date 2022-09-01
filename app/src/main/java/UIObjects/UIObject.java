@@ -9,5 +9,6 @@ public interface UIObject {
 
     public double getHeight();
     public double getWidth();
+
     
 }

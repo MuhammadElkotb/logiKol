@@ -3,6 +3,7 @@ package Providers;
 import UIObjects.BasicGateMultiInUI;
 import UIObjects.BasicGateSingleInUI;
 import UIObjects.BasicGateUI;
+import UIObjects.BufferNode;
 import UIObjects.IONode;
 import javafx.scene.image.ImageView;
 
@@ -38,6 +39,10 @@ public class UIGateProvider {
                 IONode outNode = new IONode();
                 IONode inNode1 = new IONode();
                 IONode inNode2 = new IONode();
+                outNode.setClassName("ionode-out");
+                inNode1.setClassName("ionode-in");
+                inNode2.setClassName("ionode-in");
+
                 ImageView texture = this.textureProvider.getANDGateTexture();
 
                 if(texture == null)
@@ -51,6 +56,9 @@ public class UIGateProvider {
                 IONode outNode = new IONode();
                 IONode inNode1 = new IONode();
                 IONode inNode2 = new IONode();
+                outNode.setClassName("ionode-out");
+                inNode1.setClassName("ionode-in");
+                inNode2.setClassName("ionode-in");
                 ImageView texture = this.textureProvider.getORGateTexture();
 
                 if(texture == null)
@@ -63,6 +71,8 @@ public class UIGateProvider {
             case "not" : {
                 IONode outNode = new IONode();
                 IONode inNode = new IONode();
+                outNode.setClassName("ionode-out");
+                inNode.setClassName("ionode-in");
                 ImageView texture = this.textureProvider.getNOTGateTexture();
 
                 if(texture == null)
@@ -70,6 +80,10 @@ public class UIGateProvider {
                     throw new Exception("Cannot find NOT Texture file");
                 }
                 return new BasicGateSingleInUI(outNode, inNode, texture);
+            }
+            case "io" : { 
+                IONode outNode = new IONode();
+                return new BufferNode(outNode);
             }
             default: break;
 
