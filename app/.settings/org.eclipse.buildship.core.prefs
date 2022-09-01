@@ -1,2 +1,4 @@
 connection.project.dir=..
 eclipse.preferences.version=1
+org.eclipse.jdt.core.compiler.problem.unusedImport=ignore
+

@@ -1,8 +1,6 @@
 package UIObjects;
 
-import javafx.scene.Group;
 import javafx.scene.image.ImageView;
-import Gates.BasicGate;
 public abstract class BasicGateUI extends MoveAbleUI {
 
     protected IONode outNode;

@@ -4,39 +4,16 @@
 package logikol;
 
 
-import java.io.File;
-
+import Controllers.InputHandler;
 import Controllers.UIController;
-import Gates.AND;
-import Gates.BasicGate;
-import Gates.NOT;
-import Gates.OR;
+import Providers.TextureProvider;
 import Providers.UIGateProvider;
-import Gates.Node;
 import UIObjects.BasicGateUI;
-import UIObjects.IONode;
-import UIObjects.InputNode;
-import Gates.CompoundGate;
-import Gates.Input;
-import Gates.BasicGateMultiIn;
-import Gates.BasicGateSingleIn;
-
 import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.effect.Effect;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-
-import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 public class App extends Application {
 
@@ -47,20 +24,28 @@ public class App extends Application {
     public void start(Stage stage) {
 
         Group root = new Group();
-
+        TextureProvider textureProvider = TextureProvider.getInstnace();
+        UIGateProvider uiGateProvider = UIGateProvider.getInstnace(textureProvider);
+        InputHandler inputHandler = InputHandler.getInstance();
+        UIController uiController = UIController.getInstnace(inputHandler);
 
         try
         {
-            BasicGateUI andGate1 = UIGateProvider.buildGate("AND");
-            BasicGateUI andGate2 = UIGateProvider.buildGate("AND");
-            BasicGateUI orGate1 = UIGateProvider.buildGate("OR");
+            BasicGateUI andGate1 = uiGateProvider.buildGate("AND");
+            BasicGateUI andGate2 = uiGateProvider.buildGate("AND");
+            BasicGateUI orGate1 = uiGateProvider.buildGate("OR");
+            BasicGateUI notGate = uiGateProvider.buildGate("NOT");
 
+            System.out.println("after build");
 
- 
+            uiController.mountBasicMultiInGateUI(root, andGate1, 100, 100);
+            uiController.mountBasicMultiInGateUI(root, andGate2, 300, 200);
+            uiController.mountBasicMultiInGateUI(root, orGate1, 500, 500);
 
-            UIController.mountBasicGateUI(root, andGate1, 100, 100);
-            UIController.mountBasicGateUI(root, andGate2, 300, 200);
-            UIController.mountBasicGateUI(root, orGate1, 500, 500);
+            uiController.mountBasicSingleInGateUI(root, notGate, 200, 200);
+
+            System.out.println("after not");
+
 
 
         }

@@ -1,15 +1,8 @@
 package UIObjects;
-import javafx.scene.Parent;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.event.Event;
 import javafx.scene.Group;
-
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
-
-import Gates.BasicGate;
 
 
 public class InputNode extends BasicGateUI {

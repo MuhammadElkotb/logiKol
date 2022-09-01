@@ -5,12 +5,28 @@ import javafx.scene.image.ImageView;
 
 public class TextureProvider {
 
-    private static Image ANDGate = null;
-    private static Image ORGate = null;
-    private static Image NOTGate = null;
+
+    private static TextureProvider instance = null;
+
+    private TextureProvider()
+    {
+
+    }
+    public static TextureProvider getInstnace()
+    {
+        if(instance == null)
+        {
+            instance = new TextureProvider();
+        }
+        return instance;
+    }
+
+    private Image ANDGate = null;
+    private Image ORGate = null;
+    private Image NOTGate = null;
 
 
-    public static ImageView getANDGateTexture()
+    public ImageView getANDGateTexture()
     {
         if(ANDGate == null)
         {
@@ -19,7 +35,7 @@ public class TextureProvider {
         return new ImageView(ANDGate);
     }
     
-    public static ImageView getORGateTexture()
+    public ImageView getORGateTexture()
     {
         if(ORGate == null)
         {
@@ -28,7 +44,7 @@ public class TextureProvider {
         return new ImageView(ORGate);
     }
 
-    public static ImageView getNOTGateTexture()
+    public ImageView getNOTGateTexture()
     {
         if(NOTGate == null)
         {
