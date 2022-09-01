@@ -23,8 +23,10 @@ public abstract class BasicGateUI extends MoveAbleUI {
 
     public abstract IONode[] getInNodes();
 
-    public abstract double getHeight();
-    public abstract double getWidth();
+    public abstract ImageView getTexture();
+
+    
+
 
     
 }

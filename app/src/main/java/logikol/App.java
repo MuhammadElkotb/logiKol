@@ -13,11 +13,9 @@ import Gates.NOT;
 import Gates.OR;
 import Providers.UIGateProvider;
 import Gates.Node;
-import UIObjects.ANDGate;
 import UIObjects.BasicGateUI;
 import UIObjects.IONode;
 import UIObjects.InputNode;
-import UIObjects.ORGate;
 import Gates.CompoundGate;
 import Gates.Input;
 import Gates.BasicGateMultiIn;
@@ -58,13 +56,11 @@ public class App extends Application {
             BasicGateUI orGate1 = UIGateProvider.buildGate("OR");
 
 
-            andGate1.setRoot(root);
-            andGate2.setRoot(root);
-            orGate1.setRoot(root);
+ 
 
-            UIController.moveGateUIMulitIn(andGate1, 100, 100);
-            UIController.moveGateUIMulitIn(andGate2, 300, 200);
-            UIController.moveGateUIMulitIn(orGate1, 500, 500);
+            UIController.mountBasicGateUI(root, andGate1, 100, 100);
+            UIController.mountBasicGateUI(root, andGate2, 300, 200);
+            UIController.mountBasicGateUI(root, orGate1, 500, 500);
 
 
         }

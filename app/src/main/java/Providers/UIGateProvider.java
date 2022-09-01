@@ -1,10 +1,10 @@
 package Providers;
 
 import Gates.BasicGate;
-import UIObjects.ANDGate;
+import Gates.BasicGateMultiIn;
+import UIObjects.BasicGateMultiInUI;
 import UIObjects.BasicGateUI;
 import UIObjects.IONode;
-import UIObjects.ORGate;
 import UIObjects.UIObject;
 import javafx.scene.image.ImageView;
 
@@ -26,7 +26,7 @@ public class UIGateProvider {
                     throw new Exception("Cannot find AND Texture File");
                 }
 
-                return new ANDGate(outNode, inNode1, inNode2, texture);
+                return new BasicGateMultiInUI(outNode, inNode1, inNode2, texture);
             } 
             case "OR" : {
                 IONode outNode = new IONode();
@@ -39,7 +39,7 @@ public class UIGateProvider {
                     throw new Exception("Cannot find OR Texture File");
                 }
 
-                return new ORGate(outNode, inNode1, inNode2, texture);
+                return new BasicGateMultiInUI(outNode, inNode1, inNode2, texture);
             }
             default: break;
 

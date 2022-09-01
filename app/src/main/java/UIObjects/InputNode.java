@@ -1,5 +1,6 @@
 package UIObjects;
 import javafx.scene.Parent;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.event.Event;
 import javafx.scene.Group;
@@ -62,6 +63,10 @@ public class InputNode extends BasicGateUI {
         return null;
     }
 
+    public ImageView getTexture()
+    {
+        return null;
+    }
 
   
 }

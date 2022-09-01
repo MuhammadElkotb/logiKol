@@ -76,5 +76,14 @@ public class IONode extends MoveAbleUI {
         return this.gate;
     }
 
+    public double getHeight()
+    {
+        return this.node.getRadius() * 2;
+    }
+
+    public double getWidth()
+    {
+        return this.node.getRadius() * 2;
+    }
    
 }
