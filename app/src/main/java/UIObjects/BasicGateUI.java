@@ -20,5 +20,11 @@ public abstract class BasicGateUI extends MoveAbleUI {
     {
         return this.outNode;
     }
+
+    public abstract IONode[] getInNodes();
+
+    public abstract double getHeight();
+    public abstract double getWidth();
+
     
 }

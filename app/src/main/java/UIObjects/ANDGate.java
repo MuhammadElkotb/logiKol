@@ -16,16 +16,9 @@ public class ANDGate extends BasicGateMultiInUI{
         super(outNode, inNode1, inNode2);
         this.texture = texture;
 
-        /*this.outNode.move(x + this.texture.getImage().getWidth(), y + this.texture.getImage().getHeight() / 2 + 0.3);
+        /*
 
-        this.inNode1.move(x, y + 14);
-        this.inNode2.move(x, y + this.texture.getImage().getHeight() - 15);
-        
-        this.texture.setX(x);
-        this.texture.setY(y);*/
-
-
-        /*texture.setOnMouseDragged(e -> {
+        texture.setOnMouseDragged(e -> {
 
             
             texture.setX(e.getSceneX() - texture.getImage().getWidth() / 2);
@@ -42,11 +35,11 @@ public class ANDGate extends BasicGateMultiInUI{
         });*/
 
 
-
     }
     public void move(double x, double y)
     {
-
+        this.texture.setX(x);
+        this.texture.setY(y);
     }
 
     public void setRoot(Group root)
@@ -57,5 +50,16 @@ public class ANDGate extends BasicGateMultiInUI{
         this.inNode2.setRoot(root);
         this.outNode.setRoot(root);
     }
+
+    public double getWidth()
+    {
+        return this.texture.getImage().getWidth();
+    }
+    public double getHeight()
+    {
+        return this.texture.getImage().getHeight();
+    }
+
+
 
 }

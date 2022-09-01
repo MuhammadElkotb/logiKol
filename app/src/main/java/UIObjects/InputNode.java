@@ -30,7 +30,6 @@ public class InputNode extends BasicGateUI {
         this.circle.setOnMouseDragged(e -> {
             this.move(e.getSceneX(), e.getSceneY());
         });
-
   
     }
 
@@ -42,13 +41,27 @@ public class InputNode extends BasicGateUI {
     }
 
 
-
     public void setRoot(Group root)
     {
         this.root = root;
         root.getChildren().add(this.circle);
         this.outNode.setRoot(root);
     }
+
+    public double getHeight()
+    {
+        return this.circle.getRadius() * 2;
+    }
+    public double getWidth()
+    {
+        return this.getHeight();
+    }
+
+    public IONode[] getInNodes()
+    {
+        return null;
+    }
+
 
   
 }

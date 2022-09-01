@@ -6,6 +6,7 @@ package logikol;
 
 import java.io.File;
 
+import Controllers.UIController;
 import Gates.AND;
 import Gates.BasicGate;
 import Gates.NOT;
@@ -60,6 +61,12 @@ public class App extends Application {
             andGate1.setRoot(root);
             andGate2.setRoot(root);
             orGate1.setRoot(root);
+
+            UIController.moveGateUIMulitIn(andGate1, 100, 100);
+            UIController.moveGateUIMulitIn(andGate2, 300, 200);
+            UIController.moveGateUIMulitIn(orGate1, 500, 500);
+
+
         }
         catch(Exception e)
         {

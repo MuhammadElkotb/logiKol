@@ -18,8 +18,8 @@ public abstract class BasicGateSingleInUI extends BasicGateUI {
         this.inNode = inNode;
     }
     
-    public IONode getInNode()
+    public IONode[] getInNodes()
     {
-        return this.inNode;
+        return new IONode[]{this.inNode};
     }
 }

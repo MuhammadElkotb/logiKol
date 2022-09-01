@@ -26,7 +26,7 @@ public abstract class BasicGateMultiInUI extends BasicGateUI {
 
     }
     
-    public IONode[] getInNode()
+    public IONode[] getInNodes()
     {
         return new IONode[]{this.inNode1, this.inNode2};
     }
