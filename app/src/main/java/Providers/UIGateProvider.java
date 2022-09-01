@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 public class UIGateProvider {
 
 
-    public static BasicGateUI buildGate(String gate)
+    public static BasicGateUI buildGate(String gate) throws Exception
     {
         switch(gate)
         {
@@ -21,6 +21,11 @@ public class UIGateProvider {
                 IONode inNode2 = new IONode();
                 ImageView texture = TextureProvider.getANDGateTexture();
 
+                if(texture == null)
+                {
+                    throw new Exception("Cannot find AND Texture File");
+                }
+
                 return new ANDGate(outNode, inNode1, inNode2, texture);
             } 
             case "OR" : {
@@ -28,6 +33,11 @@ public class UIGateProvider {
                 IONode inNode1 = new IONode();
                 IONode inNode2 = new IONode();
                 ImageView texture = TextureProvider.getORGateTexture();
+
+                if(texture == null)
+                {
+                    throw new Exception("Cannot find OR Texture File");
+                }
 
                 return new ORGate(outNode, inNode1, inNode2, texture);
             }
