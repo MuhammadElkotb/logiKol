@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public final class CompoundGate extends BasicGateMultiIn {
+/*public final class CompoundGate extends BasicGateMultiIn {
 
     private String name;
     private List<BasicGate> gates;
@@ -46,4 +46,4 @@ public final class CompoundGate extends BasicGateMultiIn {
         return false;
     }
     
-}
+}*/

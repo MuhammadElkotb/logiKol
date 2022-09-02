@@ -1,11 +1,15 @@
 package Providers;
 
+
 import UIObjects.BasicGateMultiInUI;
 import UIObjects.BasicGateSingleInUI;
 import UIObjects.BasicGateUI;
 import UIObjects.BufferNode;
 import UIObjects.IONode;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+
 
 public class UIGateProvider {
 
@@ -83,6 +87,7 @@ public class UIGateProvider {
             }
             case "io" : { 
                 IONode outNode = new IONode();
+                outNode.node.setFill(Color.RED);
                 return new BufferNode(outNode);
             }
             default: break;

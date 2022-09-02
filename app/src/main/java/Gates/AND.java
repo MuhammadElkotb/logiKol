@@ -3,11 +3,17 @@ package Gates;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class AND extends BasicGateMultiIn {
+public class AND implements BasicGate {
 
+
+    private List<BasicGate> in;
+    private boolean processed = false;
+    private boolean value = false;
 
     public AND()
     {
+        this.in = new ArrayList<BasicGate>();
+
     }
     
     public AND(BasicGate... args)
@@ -18,27 +24,22 @@ public final class AND extends BasicGateMultiIn {
             this.in.add(arg);
         }
     }
-    public AND(List<BasicGate> gates)
-    {
-        this.in = new ArrayList<BasicGate>();
-        this.in = gates;
-    }
 
-    public boolean getValue()
+    /*public boolean getValue()
     {
         if(this.processed) return value;
         return this.process();
-    }
+    }*/
 
     @Override
     public boolean process()
     {
-        if(this.processed) return this.getValue();
-        if(this.in.size() < 2) {
+        //if(this.processed) return this.getValue();
+        /*if(this.in.size() < 2) {
             this.processed = true;
             this.value = false;
             return false;
-        }
+        }*/
         for(BasicGate arg : this.in)
         {
             if(!arg.process()) {
@@ -51,6 +52,30 @@ public final class AND extends BasicGateMultiIn {
         this.value = true;
         return true;
     }
+
+    public void setIn(BasicGate... args)
+    {
+        for(BasicGate arg : args)
+        {
+            this.in.add(arg);
+        }
+    }
+
+    public List<BasicGate> getIn()
+    {
+        return this.in;
+    }
+
+    public void addIn(BasicGate gate)
+    {
+        this.in.add(gate);
+    }
+
+    public void setValue(boolean value)
+    {
+        
+    }
+
     
   
 }

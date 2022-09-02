@@ -73,17 +73,16 @@ public class InputHandler {
 
     private void handleIONodesLines(IOConnectionsController ioConnectionsController, BasicGateUI gate)
     {
-        Map<IONode, List<Line>> outNodesLinesMap = ioConnectionsController.getOutNodesLinesMap();
-        Map<IONode, Line> inNodesLinesMap = ioConnectionsController.getInNodesLinesMap();
+        Map<IONode, List<ConnectLine>> outNodesLinesMap = ioConnectionsController.getOutNodesLinesMap();
+        Map<IONode, ConnectLine> inNodesLinesMap = ioConnectionsController.getInNodesLinesMap();
 
         IONode outNode = gate.getOutNode();
-        List<Line> outLines = outNodesLinesMap.get(outNode);
+        List<ConnectLine> outLines = outNodesLinesMap.get(outNode);
         if(outLines != null)
         {
-            for(Line outLine : outLines)
+            for(ConnectLine outLine : outLines)
             {
-                outLine.setStartX(outNode.node.getCenterX());
-                outLine.setStartY(outNode.node.getCenterY());
+                outLine.setLine(outNode.node.getCenterX(), outNode.node.getCenterY(), outLine.getEndX(), outLine.getEndY());
             }
          
         }
@@ -93,12 +92,10 @@ public class InputHandler {
             for(int i = 0; i < gate.getInNodes().length; i++)
             {
                 IONode inNode = gate.getInNodes()[i];
-                Line inLine = inNodesLinesMap.get(inNode);
+                ConnectLine inLine = inNodesLinesMap.get(inNode);
                 if(inLine != null)
                 {
-                    inLine.setEndX(inNode.node.getCenterX());
-                    inLine.setEndY(inNode.node.getCenterY());
-    
+                    inLine.setLine(inLine.getStartX(), inLine.getStartY(), inNode.node.getCenterX(), inNode.node.getCenterY());
                 } 
             }
         }

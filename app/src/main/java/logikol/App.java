@@ -2,6 +2,7 @@
 package logikol;
 
 
+import Controllers.ConnectLine;
 import Controllers.IOConnectionsController;
 import Controllers.InputHandler;
 import Controllers.UIController;
@@ -11,8 +12,8 @@ import UIObjects.BasicGateUI;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -23,16 +24,21 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
 
-        Group root = new Group();
-        TextureProvider textureProvider = TextureProvider.getInstnace();
-        UIGateProvider uiGateProvider = UIGateProvider.getInstnace(textureProvider);
-        InputHandler inputHandler = InputHandler.getInstance();
-        IOConnectionsController ioConnectionsController = IOConnectionsController.getInstance(root);
-
-        UIController uiController = UIController.getInstnace(inputHandler, ioConnectionsController);
 
         try
         {
+
+
+            Group root = new Group();
+
+
+            TextureProvider textureProvider = TextureProvider.getInstnace();
+            UIGateProvider uiGateProvider = UIGateProvider.getInstnace(textureProvider);
+            InputHandler inputHandler = InputHandler.getInstance();
+            IOConnectionsController ioConnectionsController = IOConnectionsController.getInstance(root);
+
+            UIController uiController = UIController.getInstnace(inputHandler, ioConnectionsController);
+
             BasicGateUI andGate1 = uiGateProvider.buildGate("AND");
             BasicGateUI andGate2 = uiGateProvider.buildGate("AND");
             BasicGateUI orGate1 = uiGateProvider.buildGate("OR");
@@ -71,34 +77,22 @@ public class App extends Application {
 
             System.out.println("after not");
 
+            Scene scene = new Scene(root, width, height);
+            scene.setFill(Color.WHITE);
+            stage.setScene(scene);
+            stage.show();
+
+            
+
+          
 
         }
         catch(Exception e)
         {
             System.out.println(e.getMessage());
         }
-       
       
-        Scene scene = new Scene(root, width, height);
-        scene.setFill(Color.WHITE);
-        stage.setScene(scene);
-
-
-        scene.setOnKeyPressed(e -> {
-
-
-            if(e.getCode() == KeyCode.ESCAPE)
-            {
-                stage.close();
-            }
-
-        });        
-
-        stage.setTitle("logiKol");
-
-        scene.getStylesheets().add("style.css");
-       
-        stage.show();
+        
     }
 
     public static void main(String[] args) {

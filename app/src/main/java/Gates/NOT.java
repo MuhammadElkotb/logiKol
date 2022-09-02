@@ -1,6 +1,15 @@
 package Gates;
 
-public final class NOT extends BasicGateSingleIn {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public final class NOT implements BasicGate {
+
+
+    private BasicGate in = null;
+    private boolean processed = false;
+    private boolean value;
 
 
     public NOT(BasicGate gate)
@@ -17,13 +26,14 @@ public final class NOT extends BasicGateSingleIn {
         if(this.processed) return value;
         return this.process();
     }
+
     @Override
     public boolean process()
     {
-        if(this.processed == true)
+        /*if(this.processed == true)
         {
             return this.getValue();
-        }
+        }*/
         if(this.in == null) 
         {
             this.processed = true;
@@ -37,5 +47,31 @@ public final class NOT extends BasicGateSingleIn {
 
     }
 
-   
+    public void setIn(BasicGate... args)
+    {
+        if(args.length > 0)
+        {
+            this.in = args[0];
+        }
+    }
+
+    public List<BasicGate> getIn()
+    {
+        return new ArrayList<BasicGate>(Arrays.asList(this.in));
+    }
+
+    public void reset()
+    {
+        this.processed = false;
+    }
+
+    public void addIn(BasicGate gate)
+    {
+        this.in = gate;
+    }
+
+    public void setValue(boolean value)
+    {
+        
+    }
 }

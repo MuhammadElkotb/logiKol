@@ -3,11 +3,17 @@ package Gates;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class OR extends BasicGateMultiIn{
+public class OR implements BasicGate{
+
+
+
+    private boolean processed = false;
+    private boolean value;
+    private List<BasicGate> in;
 
     public OR()
     {
-        
+        this.in = new ArrayList<>();
     }
 
     public OR(BasicGate... args)
@@ -19,24 +25,19 @@ public final class OR extends BasicGateMultiIn{
         }
     }
 
-   
-    public OR(List<BasicGate> gates)
-    {
-        this.in = new ArrayList<BasicGate>();
-        this.in = gates;
-    }
 
-    public boolean getValue()
+
+    /*public boolean getValue()
     {
         if(this.processed) return value;
         return this.process();
-    }
+    }*/
 
     @Override
     public boolean process()
     {
 
-        if(this.processed) return this.getValue();
+        //if(this.processed) return this.getValue();
 
         if(this.in.size() == 0) 
         {
@@ -56,6 +57,35 @@ public final class OR extends BasicGateMultiIn{
         this.processed = true;
         this.value = false;
         return false;
+    }
+
+
+
+    public void addIn(BasicGate gate)
+    {
+        this.in.add(gate);
+    }
+
+    public void setIn(BasicGate... args)
+    {
+        for(BasicGate arg : args)
+        {
+            this.in.add(arg);
+        }
+    }
+
+    public List<BasicGate> getIn()
+    {
+        return this.in;
+    }
+    public void reset()
+    {
+        this.processed = false;
+    }
+
+    public void setValue(boolean value)
+    {
+        
     }
 
     

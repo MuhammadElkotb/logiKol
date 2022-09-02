@@ -1,10 +1,18 @@
 package Gates;
 
+import java.util.List;
+
 public class Input implements BasicGate{
     
-    private boolean value;
+    private BasicGate in = null;
+    public boolean value;
 
 
+
+    public Input()
+    {
+        this.value = false;
+    }
     public Input(boolean value)
     {
         this.value = value;
@@ -16,15 +24,31 @@ public class Input implements BasicGate{
     }
 
 
-    public boolean getValue()
+    /*public boolean getValue()
     {
         return this.process();
-    }
+    }*/
 
     public boolean process()
     {
         return this.value;
     }
 
+
+    public void setIn(BasicGate... args)
+    {
+        return;
+    }
+    public List<BasicGate> getIn()
+    {
+        return null;
+    }
+
+    public void addIn(BasicGate gate)
+    {
+        return;
+    }
+
+        
     
 }

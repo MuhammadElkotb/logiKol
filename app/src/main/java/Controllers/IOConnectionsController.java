@@ -1,6 +1,7 @@
 package Controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -18,8 +19,8 @@ public class IOConnectionsController {
     private Set<IONode> inNodes;
     private Set<IONode> outNodes;
     private Map<IONode, IONode> inOutNodesMap;
-    private Map<IONode, List<Line>> outNodesLinesMap;
-    private Map<IONode, Line> inNodesLinesMap;
+    private Map<IONode, List<ConnectLine>> outNodesLinesMap;
+    private Map<IONode, ConnectLine> inNodesLinesMap;
 
 
     private IOConnectionsController(Group root)
@@ -49,25 +50,23 @@ public class IOConnectionsController {
         {
             return;
         }
-        Line line = new Line();
+
+        ConnectLine connectLine = new ConnectLine();
 
 
-        this.inNodesLinesMap.put(inNode, line);
+        this.inNodesLinesMap.put(inNode, connectLine);
 
         if(!this.outNodesLinesMap.containsKey(outNode))
         {
-            this.outNodesLinesMap.put(outNode, new ArrayList<Line>());
+            this.outNodesLinesMap.put(outNode, new ArrayList<ConnectLine>());
         }
-        this.outNodesLinesMap.get(outNode).add(line);
+        this.outNodesLinesMap.get(outNode).add(connectLine);
 
 
-        line.setStartX(outNode.node.getCenterX());
-        line.setStartY(outNode.node.getCenterY());
+        connectLine.setLine(outNode.node.getCenterX(), outNode.node.getCenterY(), inNode.node.getCenterX(), inNode.node.getCenterY());
 
-        line.setEndX(inNode.node.getCenterX());
-        line.setEndY(inNode.node.getCenterY());
-
-        this.root.getChildren().add(line);
+        
+        this.root.getChildren().addAll(0, Arrays.asList(connectLine.getLines()));
 
         inNodes.add(inNode);
         outNodes.add(outNode);
@@ -89,12 +88,12 @@ public class IOConnectionsController {
         return this.inOutNodesMap;
     }
 
-    public Map<IONode, Line> getInNodesLinesMap()
+    public Map<IONode, ConnectLine> getInNodesLinesMap()
     {
         return this.inNodesLinesMap;
     }
 
-    public Map<IONode, List<Line>> getOutNodesLinesMap()
+    public Map<IONode, List<ConnectLine>> getOutNodesLinesMap()
     {
         return this.outNodesLinesMap;
     }
