@@ -6,14 +6,12 @@ import java.util.Map;
 
 import UIObjects.BasicGateUI;
 import UIObjects.IONode;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Line;
 
 public class InputHandler {
 
 
     private static InputHandler instance = null;
-    private Line line = null;
+    private ConnectLine line = null;
     private IONode outNodetemp = null;
     private boolean dragging = false;
     private boolean foundInNode = false;
@@ -34,40 +32,74 @@ public class InputHandler {
 
     public void handleBasicGateMultiInInput(IOConnectionsController ioConnectionsController, BasicGateUI gate)
     {
-        ImageView texture = gate.getTexture();
+        gate.setOnMouseDragged(e -> {
 
-        texture.setOnMouseDragged(e -> {
-            texture.setX(e.getSceneX() - gate.getWidth() / 2);
-            texture.setY(e.getSceneY() - gate.getHeight() / 2);
-
-
-            gate.getOutNode().move(texture.getX() + gate.getWidth(), texture.getY() + 
-                                gate.getHeight() / 2 + 0.3);
-
-           
-            gate.getInNodes()[0].move(texture.getX(), texture.getY() + 14);
-            gate.getInNodes()[1].move(texture.getX(), texture.getY() + gate.getHeight() - 15);
-
-            this.handleIONodesLines(ioConnectionsController, gate);
-
+            double x = e.getX() - gate.getWidth() / 2;
+            double y = e.getY() - gate.getHeight() / 2;
+            
+            if(x - 8 > 0)
+            {
+                gate.move(x, y);
+                gate.getOutNode().move(x + gate.getWidth(), y + 
+                                    gate.getHeight() / 2 + 0.3);
+                gate.getInNodes()[0].move(x, y + 14);
+                gate.getInNodes()[1].move(x, y + gate.getHeight() - 15);
+                this.handleIONodesLines(ioConnectionsController, gate);
+            }
+            else
+            {
+                gate.move(gate.getX(), y);
+                gate.getOutNode().move(gate.getX() + gate.getWidth(), y + 
+                                    gate.getHeight() / 2 + 0.3);
+                gate.getInNodes()[0].move(gate.getX(), y + 14);
+                gate.getInNodes()[1].move(gate.getX(), y + gate.getHeight() - 15);
+                this.handleIONodesLines(ioConnectionsController, gate);
+            }
+            
         });
     }
 
 
     public void handleBasicSingleInInput(IOConnectionsController ioConnectionsController, BasicGateUI gate)
     {
-        ImageView texture = gate.getTexture();
+        gate.setOnMouseDragged(e -> {
 
+            double x = e.getX() - gate.getWidth() / 2;
+            double y = e.getY() - gate.getHeight() / 2;
 
-        texture.setOnMouseDragged(e -> {
-            texture.setX(e.getSceneX() - gate.getWidth() / 2);
-            texture.setY(e.getSceneY() - gate.getWidth() / 2);
+            if(x - 8 > 0)
+            {
+                gate.move(x, y);
+                gate.getOutNode().move(x + gate.getWidth(), y + gate.getHeight() / 2 + 0.3);
+                gate.getInNodes()[0].move(x, y + gate.getHeight() / 2);
+                this.handleIONodesLines(ioConnectionsController, gate);
+            }
+            else
+            {
+                gate.move(gate.getX(), y);
+                gate.getOutNode().move(gate.getX() + gate.getWidth(), y + gate.getHeight() / 2 + 0.3);
+                gate.getInNodes()[0].move(gate.getX(), y + gate.getHeight() / 2);
+                this.handleIONodesLines(ioConnectionsController, gate);
+            }
+        });
+    }
 
-            gate.getOutNode().move(texture.getX() + gate.getWidth(), texture.getY() + gate.getHeight() / 2 + 0.3);
-
-            gate.getInNodes()[0].move(texture.getX(), texture.getY() + gate.getHeight() / 2);
-            this.handleIONodesLines(ioConnectionsController, gate);
-
+    public void handleBufferNode(IOConnectionsController ioConnectionsController, BasicGateUI gate)
+    {
+        gate.setOnMouseDragged(e -> {
+            double x = e.getX();
+            double y = e.getY();
+            if(x - 11 > 0)
+            {
+                gate.move(x, y);
+                this.handleIONodesLines(ioConnectionsController, gate);
+            }
+            else
+            {
+                gate.move(gate.getX(), y);
+                this.handleIONodesLines(ioConnectionsController, gate);
+            }
+            
         });
     }
 
@@ -102,35 +134,22 @@ public class InputHandler {
         
     }
 
-    public void handleBufferNode(IOConnectionsController ioConnectionsController, BasicGateUI gate)
-    {
-        gate.getOutNode().node.setOnMouseDragged(e -> {
-            gate.move(e.getSceneX(), e.getSceneY());
-            this.handleIONodesLines(ioConnectionsController, gate);
-        });
-  
-    }
+   
 
     public void handleIOConnection(IOConnectionsController ioConnectionsController, BasicGateUI gate)
     {
 
        
         gate.getOutNode().node.setOnMouseDragged(e -> {
-
             if(line == null)
             {
-                line = new Line();
+                line = new ConnectLine();
                 outNodetemp = gate.getOutNode();
-                gate.getRoot().getChildren().add(line);
+                gate.getRoot().getChildren().addAll(line.getLines());
             }
-            line.setStartX(gate.getOutNode().node.getCenterX());
-            line.setStartY(gate.getOutNode().node.getCenterY());
-            
-            line.setEndX(e.getSceneX());
-            line.setEndY(e.getSceneY());
+
+            line.setLine(gate.getOutNode().getX(), gate.getOutNode().getY(), e.getX(), e.getY());
             this.dragging = true;
-
-
         });
 
 
@@ -138,7 +157,7 @@ public class InputHandler {
 
             if(this.dragging && !this.foundInNode)
             {
-                gate.getRoot().getChildren().remove(line);
+                gate.getRoot().getChildren().removeAll(line.getLines());
                 this.dragging = false;  
                 line = null;
                 outNodetemp = null;

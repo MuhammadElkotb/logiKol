@@ -2,6 +2,7 @@ package Controllers;
 
 import UIObjects.BasicGateUI;
 import javafx.scene.Group;
+import javafx.scene.layout.Pane;
 public class UIController {
 
     private static UIController instance = null;
@@ -30,7 +31,7 @@ public class UIController {
         gate.getOutNode().move(x + gate.getWidth(), y + gate.getHeight() / 2 + 0.3);
     } 
 
-    public void mountBasicMultiInGateUI(Group root, BasicGateUI gate, double x, double y)
+    public void mountBasicMultiInGateUI(Pane root, BasicGateUI gate, double x, double y)
     {
         gate.setRoot(root);
         gate.move(x, y);
@@ -40,16 +41,12 @@ public class UIController {
         gate.getInNodes()[1].move(x, y + gate.getHeight() - 15);
 
         this.inputHandler.handleIOConnection(this.ioConnectionsController, gate);
-
-
         this.ioConnectionsController.getOutNodes().add(gate.getOutNode());
         this.ioConnectionsController.getInNodes().add(gate.getInNodes()[0]);
         this.ioConnectionsController.getInNodes().add(gate.getInNodes()[1]);
-
         this.inputHandler.handleBasicGateMultiInInput(this.ioConnectionsController, gate);
-        this.inputHandler.handleIOConnection(this.ioConnectionsController, gate);
     }
-    public void mountBasicSingleInGateUI(Group root, BasicGateUI gate, double x, double y)
+    public void mountBasicSingleInGateUI(Pane root, BasicGateUI gate, double x, double y)
     {
         gate.setRoot(root);
         gate.move(x, y);
@@ -63,7 +60,7 @@ public class UIController {
         this.inputHandler.handleBasicSingleInInput(this.ioConnectionsController, gate);
 
     }
-    public void mountBufferNode(Group root, BasicGateUI gate, double x, double y)
+    public void mountBufferNode(Pane root, BasicGateUI gate, double x, double y)
     {
         gate.setRoot(root);
         gate.move(x, y);

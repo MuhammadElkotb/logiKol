@@ -1,6 +1,9 @@
 package UIObjects;
 
-import javafx.scene.Group;
+import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -14,6 +17,7 @@ public class IONode extends MoveAbleUI {
         this.node.setFill(Color.WHITE);
         this.node.setStroke(Color.BLACK);
         this.node.setStrokeWidth(3);
+        this.node.setSmooth(true);
     }
 
     public void move(double x, double y)
@@ -22,7 +26,7 @@ public class IONode extends MoveAbleUI {
         this.node.setCenterY(y);
     } 
 
-    public void setRoot(Group root)
+    public void setRoot(Pane root)
     {
         this.root = root;
         this.root.getChildren().add(this.node);
@@ -52,6 +56,25 @@ public class IONode extends MoveAbleUI {
     public void setClassName(String className)
     {
         this.node.getStyleClass().addAll(className);
+    }
+
+    public void setOnMouseDragged(EventHandler<MouseEvent> eventHandler)
+    {
+        this.node.setOnMouseDragged(eventHandler);
+    }
+
+    public double getX()
+    {
+        return this.node.getCenterX();
+    }
+    public double getY()
+    {
+        return this.node.getCenterY();
+    }
+
+    public Point2D getPosition()
+    {
+        return new Point2D(this.node.getCenterX(), this.node.getCenterY());
     }
 
 

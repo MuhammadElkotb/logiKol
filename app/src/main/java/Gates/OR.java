@@ -5,10 +5,6 @@ import java.util.List;
 
 public class OR implements BasicGate{
 
-
-
-    private boolean processed = false;
-    private boolean value;
     private List<BasicGate> in;
 
     public OR()
@@ -27,12 +23,7 @@ public class OR implements BasicGate{
 
 
 
-    /*public boolean getValue()
-    {
-        if(this.processed) return value;
-        return this.process();
-    }*/
-
+    
     @Override
     public boolean process()
     {
@@ -41,21 +32,15 @@ public class OR implements BasicGate{
 
         if(this.in.size() == 0) 
         {
-            this.processed = true;
-            this.value = false;
             return false;
         } 
         for(BasicGate arg : this.in)
         {
             if(arg.process())
             {
-                this.processed = true;
-                this.value = true;
                 return true;
             }  
         }
-        this.processed = true;
-        this.value = false;
         return false;
     }
 
@@ -68,6 +53,7 @@ public class OR implements BasicGate{
 
     public void setIn(BasicGate... args)
     {
+        this.in.clear();
         for(BasicGate arg : args)
         {
             this.in.add(arg);
@@ -78,15 +64,12 @@ public class OR implements BasicGate{
     {
         return this.in;
     }
-    public void reset()
-    {
-        this.processed = false;
-    }
-
-    public void setValue(boolean value)
+    
+    public void update()
     {
         
     }
+
 
     
 }

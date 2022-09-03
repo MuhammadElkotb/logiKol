@@ -10,12 +10,12 @@ import java.util.Set;
 
 import UIObjects.IONode;
 import javafx.scene.Group;
-import javafx.scene.shape.Line;
+import javafx.scene.layout.Pane;
 
 public class IOConnectionsController {
     
     private static IOConnectionsController instance = null;
-    private Group root;
+    private Pane root;
     private Set<IONode> inNodes;
     private Set<IONode> outNodes;
     private Map<IONode, IONode> inOutNodesMap;
@@ -23,7 +23,7 @@ public class IOConnectionsController {
     private Map<IONode, ConnectLine> inNodesLinesMap;
 
 
-    private IOConnectionsController(Group root)
+    private IOConnectionsController(Pane root)
     {
         inNodes = new HashSet<>();
         outNodes = new HashSet<>();
@@ -34,7 +34,7 @@ public class IOConnectionsController {
         this.root = root;
     }
 
-    public static IOConnectionsController getInstance(Group root)
+    public static IOConnectionsController getInstance(Pane root)
     {
         if(instance == null)
         {
@@ -68,8 +68,6 @@ public class IOConnectionsController {
         
         this.root.getChildren().addAll(0, Arrays.asList(connectLine.getLines()));
 
-        inNodes.add(inNode);
-        outNodes.add(outNode);
         inOutNodesMap.put(outNode, inNode);
     }
 

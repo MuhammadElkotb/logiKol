@@ -2,18 +2,23 @@
 package logikol;
 
 
-import Controllers.ConnectLine;
+import javax.sound.midi.Soundbank;
+
 import Controllers.IOConnectionsController;
 import Controllers.InputHandler;
 import Controllers.UIController;
 import Providers.TextureProvider;
 import Providers.UIGateProvider;
-import UIObjects.BasicGateUI;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -27,64 +32,130 @@ public class App extends Application {
 
         try
         {
+            BorderPane borderPane = new BorderPane();
+
+            Pane pane = new Pane();
+           // pane.getChildren().add(root);
+
+            borderPane.setCenter(pane);
+
+            VBox vBox = new VBox(8);
+
+            vBox.setPrefWidth(300);
+           // pane.setPrefSize(300, 300);
+
+            vBox.setBorder(Border.stroke(Color.BLACK));
+            pane.setBorder(Border.stroke(Color.RED));
+
+            Button andBtn = new Button("AND");
+            Button orBtn = new Button("OR");
+            Button notBtn = new Button("NOT");
+            Button buffBtn = new Button("Buffer");
+            Button inBtn = new Button("in");
 
 
-            Group root = new Group();
+
+
+            
+            vBox.getChildren().addAll(andBtn, orBtn, notBtn, buffBtn, inBtn);
+            borderPane.setLeft(vBox);
 
 
             TextureProvider textureProvider = TextureProvider.getInstnace();
             UIGateProvider uiGateProvider = UIGateProvider.getInstnace(textureProvider);
             InputHandler inputHandler = InputHandler.getInstance();
-            IOConnectionsController ioConnectionsController = IOConnectionsController.getInstance(root);
-
+            IOConnectionsController ioConnectionsController = IOConnectionsController.getInstance(pane);
             UIController uiController = UIController.getInstnace(inputHandler, ioConnectionsController);
 
-            BasicGateUI andGate1 = uiGateProvider.buildGate("AND");
-            BasicGateUI andGate2 = uiGateProvider.buildGate("AND");
-            BasicGateUI orGate1 = uiGateProvider.buildGate("OR");
-            BasicGateUI notGate = uiGateProvider.buildGate("NOT");
-            BasicGateUI input1 = uiGateProvider.buildGate("io");
-            BasicGateUI input2 = uiGateProvider.buildGate("io");
-            BasicGateUI output = uiGateProvider.buildGate("io");
+            andBtn.setOnMouseClicked(e -> {
+                try 
+                {
+                    uiController.mountBasicMultiInGateUI(pane, uiGateProvider.buildGate("And"), 150, 100);
+
+                }
+                catch(Exception exception)
+                {   
+                    System.out.println(exception.getMessage());
+                }
+            });
+
+            orBtn.setOnMouseClicked(e -> {
+                try 
+                {
+                    uiController.mountBasicMultiInGateUI(pane, uiGateProvider.buildGate("or"), 200, 100);
+
+                }
+                catch(Exception exception)
+                {   
+                    System.out.println(exception.getMessage());
+                }
+            });
+
+            notBtn.setOnMouseClicked(e -> {
+                try 
+                {
+                    uiController.mountBasicSingleInGateUI(pane, uiGateProvider.buildGate("not"), 200, 300);
+
+                }
+                catch(Exception exception)
+                {   
+                    System.out.println(exception.getMessage());
+                }
+            });
+
+            buffBtn.setOnMouseClicked(e -> {
+                try 
+                {
+                    uiController.mountBufferNode(pane, uiGateProvider.buildGate("io"), 200, 520);
+
+                }
+                catch(Exception exception)
+                {   
+                    System.out.println(exception.getMessage());
+                }
+            });
 
 
-            System.out.println("after build");
+            inBtn.setOnMouseClicked(e -> {
+                try 
+                {
+                    uiController.mountBufferNode(pane, uiGateProvider.buildGate("in"), 200, 600);
 
-            uiController.mountBasicMultiInGateUI(root, andGate1, 100, 100);
-            uiController.mountBasicMultiInGateUI(root, andGate2, 300, 200);
-            uiController.mountBasicMultiInGateUI(root, orGate1, 500, 500);
-            uiController.mountBasicSingleInGateUI(root, notGate, 200, 200);
-            uiController.mountBufferNode(root, input1, 60, 100);
-            uiController.mountBufferNode(root, input2, 60, 160);
-            uiController.mountBufferNode(root, output, 300, 50);
+                }
+                catch(Exception exception)
+                {   
+                    System.out.println(exception.getMessage());
+                }
+            });
 
+            /*ImageView texture = textureProvider.getANDGateTexture();
 
-            // XOR connection 
-            ioConnectionsController.connect(andGate1.getOutNode(), notGate.getInNodes()[0]);
+           
+            texture.setX(200);
+            texture.setY(200);
 
-            ioConnectionsController.connect(input1.getOutNode(), andGate1.getInNodes()[0]);
-            ioConnectionsController.connect(input1.getOutNode(), orGate1.getInNodes()[0]);
+            pane.getChildren().add(texture);
 
-            ioConnectionsController.connect(input2.getOutNode(), andGate1.getInNodes()[1]);
-            ioConnectionsController.connect(input2.getOutNode(), orGate1.getInNodes()[1]);
+            texture.setOnMouseDragged(e -> {
 
-            ioConnectionsController.connect(notGate.getOutNode(), andGate2.getInNodes()[0]);
-            ioConnectionsController.connect(orGate1.getOutNode(), andGate2.getInNodes()[1]);
+                System.out.println(pane.getLayoutX());
 
-            ioConnectionsController.connect(andGate2.getOutNode(), output.getInNodes()[0]);
+                if(pane.contains(e.getX(), e.getY()))
+                {
+                    texture.setX(e.getX() - 30);
+                    texture.setY(e.getY());
+                }
+                else
+                {
+                    System.out.println("false");
 
+                }
+            });*/
 
-
-            System.out.println("after not");
-
-            Scene scene = new Scene(root, width, height);
+            Scene scene = new Scene(borderPane, width, height);
             scene.setFill(Color.WHITE);
             stage.setScene(scene);
             stage.show();
-
-            
-
-          
 
         }
         catch(Exception e)

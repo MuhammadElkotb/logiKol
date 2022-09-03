@@ -1,4 +1,5 @@
 package UIObjects;
+
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -6,23 +7,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+public class InNode extends BasicGateUI{
 
-public class BufferNode extends BasicGateUI {
-
-
-    private IONode inNode;
-    public BufferNode(IONode node)
+    public InNode(IONode outNode)
     {
-        super(node);
-        this.inNode = outNode;
+        super(outNode);
         this.outNode.node.setRadius(10);
+        
     }
 
     public void move(double x, double y)
     {
         this.outNode.move(x, y);
     }
-
 
     public void setRoot(Pane root)
     {
@@ -41,7 +38,7 @@ public class BufferNode extends BasicGateUI {
 
     public IONode[] getInNodes()
     {
-        return new IONode[]{this.inNode};
+        return null;
     }
 
     public ImageView getTexture()
@@ -49,11 +46,11 @@ public class BufferNode extends BasicGateUI {
         return null;
     }
 
+
     public void setOnMouseDragged(EventHandler<MouseEvent> eventHandler)
     {
         this.outNode.setOnMouseDragged(eventHandler);
     }
-
 
     public double getX()
     {
@@ -68,5 +65,5 @@ public class BufferNode extends BasicGateUI {
     {
         return new Point2D(this.outNode.node.getCenterX(), this.outNode.node.getCenterY());
     }
-  
+    
 }

@@ -1,19 +1,25 @@
 package UIObjects;
 
+
+import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public abstract class MoveAbleUI implements UIObject{
 
-    Group root;
+    Pane root;
     public MoveAbleUI()
     {
     }
     public abstract void move(double x, double y);
 
-    public Group getRoot()
+    public Pane getRoot()
     {
         return this.root;
     }
+
+    public abstract void setOnMouseDragged(EventHandler<MouseEvent> eventHandler);
 
    
 }

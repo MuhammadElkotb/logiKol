@@ -1,5 +1,6 @@
 package Gates;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Input implements BasicGate{
@@ -24,11 +25,6 @@ public class Input implements BasicGate{
     }
 
 
-    /*public boolean getValue()
-    {
-        return this.process();
-    }*/
-
     public boolean process()
     {
         return this.value;
@@ -41,7 +37,7 @@ public class Input implements BasicGate{
     }
     public List<BasicGate> getIn()
     {
-        return null;
+        return new ArrayList<>();
     }
 
     public void addIn(BasicGate gate)
@@ -50,5 +46,8 @@ public class Input implements BasicGate{
     }
 
         
-    
+    public void update()
+    {
+        
+    }
 }

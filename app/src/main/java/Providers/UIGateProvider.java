@@ -6,9 +6,11 @@ import UIObjects.BasicGateSingleInUI;
 import UIObjects.BasicGateUI;
 import UIObjects.BufferNode;
 import UIObjects.IONode;
+import UIObjects.InNode;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeType;
 
 
 public class UIGateProvider {
@@ -89,6 +91,12 @@ public class UIGateProvider {
                 IONode outNode = new IONode();
                 outNode.node.setFill(Color.RED);
                 return new BufferNode(outNode);
+            }
+            case "in" : {
+                IONode outNode = new IONode();
+                outNode.node.setFill(Color.RED);
+                outNode.node.setStroke(Color.BLUE);
+                return new InNode(outNode);
             }
             default: break;
 

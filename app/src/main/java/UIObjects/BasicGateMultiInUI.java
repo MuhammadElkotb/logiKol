@@ -1,7 +1,11 @@
 package UIObjects;
 
+import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public class BasicGateMultiInUI extends BasicGateUI {
     
@@ -20,6 +24,8 @@ public class BasicGateMultiInUI extends BasicGateUI {
         this.inNode2.setGate(this);
 
         this.texture = texture;
+
+        this.texture.setSmooth(true);
 
     }
 
@@ -41,7 +47,7 @@ public class BasicGateMultiInUI extends BasicGateUI {
         this.texture.setY(y);
     }
 
-    public void setRoot(Group root)
+    public void setRoot(Pane root)
     {
         this.root = root;
         this.root.getChildren().add(this.texture);
@@ -64,6 +70,27 @@ public class BasicGateMultiInUI extends BasicGateUI {
     {
         return this.texture;
     }
+
+
+    public void setOnMouseDragged(EventHandler<MouseEvent> eventHandler)
+    {
+        this.texture.setOnMouseDragged(eventHandler);
+    }
+
+    public double getX()
+    {
+        return this.texture.getX();
+    }
+    public double getY()
+    {
+        return this.texture.getY();
+    }
+
+    public Point2D getPosition()
+    {
+        return new Point2D(this.texture.getX(), this.texture.getY());
+    }
+
 
     
 }
