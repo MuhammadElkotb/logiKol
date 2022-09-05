@@ -20,6 +20,7 @@ public abstract class MoveAbleUI implements UIObject{
     }
 
     public abstract void setOnMouseDragged(EventHandler<MouseEvent> eventHandler);
+    public abstract void setOnMouseReleased(EventHandler<MouseEvent> eventHandler);
 
    
 }

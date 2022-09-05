@@ -18,10 +18,7 @@ public class BasicGateSingleInUI extends BasicGateUI {
         this.inNode.setGate(this);
         this.texture = texture;
         this.texture.setSmooth(true);
-
-        
     }
-
 
     public void move(double x, double y) {
         this.texture.setX(x);
@@ -42,7 +39,6 @@ public class BasicGateSingleInUI extends BasicGateUI {
     {
         this.root = root;
         this.root.getChildren().add(this.texture);
-        System.out.println("set root");
 
         this.inNode.setRoot(root);
         this.outNode.setRoot(root);
@@ -66,6 +62,12 @@ public class BasicGateSingleInUI extends BasicGateUI {
     public void setOnMouseDragged(EventHandler<MouseEvent> eventHandler)
     {
         this.texture.setOnMouseDragged(eventHandler);
+    }
+
+
+    public void setOnMouseReleased(EventHandler<MouseEvent> eventHandler)
+    {
+        this.texture.setOnMouseReleased(eventHandler);
     }
 
     public double getX()

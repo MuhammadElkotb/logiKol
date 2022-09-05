@@ -77,6 +77,12 @@ public class BasicGateMultiInUI extends BasicGateUI {
         this.texture.setOnMouseDragged(eventHandler);
     }
 
+    public void setOnMouseReleased(EventHandler<MouseEvent> eventHandler)
+    {
+        this.texture.setOnMouseReleased(eventHandler);
+    }
+
+
     public double getX()
     {
         return this.texture.getX();

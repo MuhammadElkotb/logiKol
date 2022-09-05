@@ -6,7 +6,10 @@ import javax.sound.midi.Soundbank;
 
 import Controllers.IOConnectionsController;
 import Controllers.InputHandler;
+import Controllers.LogicalGraph;
 import Controllers.UIController;
+import Gates.BasicGate;
+import Providers.GateProvider;
 import Providers.TextureProvider;
 import Providers.UIGateProvider;
 import javafx.application.Application;
@@ -52,25 +55,25 @@ public class App extends Application {
             Button notBtn = new Button("NOT");
             Button buffBtn = new Button("Buffer");
             Button inBtn = new Button("in");
-
-
-
-
+            Button runBtn = new Button("RUN");
             
-            vBox.getChildren().addAll(andBtn, orBtn, notBtn, buffBtn, inBtn);
+            vBox.getChildren().addAll(andBtn, orBtn, notBtn, buffBtn, inBtn, runBtn);
             borderPane.setLeft(vBox);
 
 
             TextureProvider textureProvider = TextureProvider.getInstnace();
             UIGateProvider uiGateProvider = UIGateProvider.getInstnace(textureProvider);
+            GateProvider gateProvider = GateProvider.getInstnace();
             InputHandler inputHandler = InputHandler.getInstance();
-            IOConnectionsController ioConnectionsController = IOConnectionsController.getInstance(pane);
-            UIController uiController = UIController.getInstnace(inputHandler, ioConnectionsController);
+            LogicalGraph logicalGraph = new LogicalGraph();
+            IOConnectionsController ioConnectionsController = IOConnectionsController.getInstance(pane, logicalGraph);
+            UIController uiController = UIController.getInstnace(inputHandler, ioConnectionsController, logicalGraph);
+
 
             andBtn.setOnMouseClicked(e -> {
                 try 
                 {
-                    uiController.mountBasicMultiInGateUI(pane, uiGateProvider.buildGate("And"), 150, 100);
+                    uiController.mountBasicMultiInGateUI(pane, uiGateProvider.buildGate("And"), gateProvider.buildGate("AND"), 150, 100);
 
                 }
                 catch(Exception exception)
@@ -82,7 +85,7 @@ public class App extends Application {
             orBtn.setOnMouseClicked(e -> {
                 try 
                 {
-                    uiController.mountBasicMultiInGateUI(pane, uiGateProvider.buildGate("or"), 200, 100);
+                    uiController.mountBasicMultiInGateUI(pane, uiGateProvider.buildGate("or"), gateProvider.buildGate("OR"), 200, 100);
 
                 }
                 catch(Exception exception)
@@ -94,7 +97,7 @@ public class App extends Application {
             notBtn.setOnMouseClicked(e -> {
                 try 
                 {
-                    uiController.mountBasicSingleInGateUI(pane, uiGateProvider.buildGate("not"), 200, 300);
+                    uiController.mountBasicSingleInGateUI(pane, uiGateProvider.buildGate("not"), gateProvider.buildGate("NOT"), 200, 300);
 
                 }
                 catch(Exception exception)
@@ -106,7 +109,7 @@ public class App extends Application {
             buffBtn.setOnMouseClicked(e -> {
                 try 
                 {
-                    uiController.mountBufferNode(pane, uiGateProvider.buildGate("io"), 200, 520);
+                    uiController.mountBufferNode(pane, uiGateProvider.buildGate("io"), gateProvider.buildGate("io"), 200, 520);
 
                 }
                 catch(Exception exception)
@@ -119,12 +122,28 @@ public class App extends Application {
             inBtn.setOnMouseClicked(e -> {
                 try 
                 {
-                    uiController.mountBufferNode(pane, uiGateProvider.buildGate("in"), 200, 600);
+                    uiController.mountInNode(pane, uiGateProvider.buildGate("in"), gateProvider.buildGate("in"), 200, 600);
 
                 }
                 catch(Exception exception)
                 {   
                     System.out.println(exception.getMessage());
+                }
+            });
+
+            runBtn.setOnMouseClicked(e -> {
+                for(BasicGate gate : logicalGraph.getBufferNodes())
+                {
+                    boolean value = gate.process();
+
+                    if(value)
+                    {
+                        logicalGraph.getGraph().getBackward(gate).getOutNode().node.setFill(Color.GREEN);
+                    }
+                    else
+                    {
+                        logicalGraph.getGraph().getBackward(gate).getOutNode().node.setFill(Color.RED);
+                    }
                 }
             });
 

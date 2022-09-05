@@ -14,7 +14,7 @@ public class BufferNode extends BasicGateUI {
     public BufferNode(IONode node)
     {
         super(node);
-        this.inNode = outNode;
+        this.inNode = node;
         this.outNode.node.setRadius(10);
     }
 
@@ -22,7 +22,6 @@ public class BufferNode extends BasicGateUI {
     {
         this.outNode.move(x, y);
     }
-
 
     public void setRoot(Pane root)
     {
@@ -54,6 +53,10 @@ public class BufferNode extends BasicGateUI {
         this.outNode.setOnMouseDragged(eventHandler);
     }
 
+    public void setOnMouseReleased(EventHandler<MouseEvent> eventHandler)
+    {
+        this.outNode.setOnMouseReleased(eventHandler);
+    }
 
     public double getX()
     {

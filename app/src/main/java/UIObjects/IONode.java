@@ -63,6 +63,14 @@ public class IONode extends MoveAbleUI {
         this.node.setOnMouseDragged(eventHandler);
     }
 
+
+    public void setOnMouseReleased(EventHandler<MouseEvent> eventHandler)
+    {
+        this.node.setOnMouseReleased(eventHandler);
+    }
+
+
+
     public double getX()
     {
         return this.node.getCenterX();

@@ -48,6 +48,6 @@ public class Input implements BasicGate{
         
     public void update()
     {
-        
+        this.value = !this.value;
     }
 }

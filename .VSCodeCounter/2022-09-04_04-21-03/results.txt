@@ -1,0 +1,120 @@
+Date : 2022-09-04 04:21:03
+Directory : /home/kotb/code/java/logiKol
+Total : 67 files,  2210 codes, 170 comments, 500 blanks, all 2880 lines
+
+Languages
++-----------------+------------+------------+------------+------------+------------+
+| language        | files      | code       | comment    | blank      | total      |
++-----------------+------------+------------+------------+------------+------------+
+| Java            |         59 |      2,038 |         87 |        457 |      2,582 |
+| Batch           |          1 |         70 |          0 |         22 |         92 |
+| XML             |          2 |         56 |         62 |         10 |        128 |
+| Groovy          |          2 |         23 |         21 |         10 |         54 |
+| CSS             |          2 |         18 |          0 |          0 |         18 |
+| Java Properties |          1 |          5 |          0 |          1 |          6 |
++-----------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                    | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                       |         67 |      2,210 |        170 |        500 |      2,880 |
+| app                                                                                     |         64 |      2,133 |        162 |        475 |      2,770 |
+| app/bin                                                                                 |         31 |        704 |         41 |          5 |        750 |
+| app/bin/main                                                                            |         30 |        699 |         41 |          5 |        745 |
+| app/bin/main/Controllers                                                                |          5 |        200 |          0 |          0 |        200 |
+| app/bin/main/Gates                                                                      |         10 |        137 |          6 |          0 |        143 |
+| app/bin/main/Providers                                                                  |          2 |         51 |          0 |          0 |         51 |
+| app/bin/main/UIObjects                                                                  |          8 |        179 |          4 |          0 |        183 |
+| app/bin/main/logikol                                                                    |          3 |         95 |          0 |          0 |         95 |
+| app/bin/test                                                                            |          1 |          5 |          0 |          0 |          5 |
+| app/bin/test/logikol                                                                    |          1 |          5 |          0 |          0 |          5 |
+| app/src                                                                                 |         32 |      1,408 |        108 |        462 |      1,978 |
+| app/src/main                                                                            |         31 |      1,405 |        105 |        458 |      1,968 |
+| app/src/main/java                                                                       |         29 |      1,368 |         74 |        453 |      1,895 |
+| app/src/main/java/Controllers                                                           |          5 |        417 |          4 |        106 |        527 |
+| app/src/main/java/Gates                                                                 |         11 |        280 |         45 |        119 |        444 |
+| app/src/main/java/Providers                                                             |          2 |        134 |          0 |         33 |        167 |
+| app/src/main/java/UIObjects                                                             |          8 |        385 |          0 |        132 |        517 |
+| app/src/main/java/logikol                                                               |          3 |        152 |         25 |         63 |        240 |
+| app/src/main/resources                                                                  |          2 |         37 |         31 |          5 |         73 |
+| app/src/test                                                                            |          1 |          3 |          3 |          4 |         10 |
+| app/src/test/java                                                                       |          1 |          3 |          3 |          4 |         10 |
+| app/src/test/java/logikol                                                               |          1 |          3 |          3 |          4 |         10 |
+| gradle                                                                                  |          1 |          5 |          0 |          1 |          6 |
+| gradle/wrapper                                                                          |          1 |          5 |          0 |          1 |          6 |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| filename                                                                                | language        | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| /home/kotb/code/java/logiKol/app/bin/main/Controllers/ConnectLine.class                 | Java            |         27 |          0 |          0 |         27 |
+| /home/kotb/code/java/logiKol/app/bin/main/Controllers/IOConnectionsController.class     | Java            |         30 |          0 |          0 |         30 |
+| /home/kotb/code/java/logiKol/app/bin/main/Controllers/InputHandler.class                | Java            |        101 |          0 |          0 |        101 |
+| /home/kotb/code/java/logiKol/app/bin/main/Controllers/LogicalGraph.class                | Java            |          5 |          0 |          0 |          5 |
+| /home/kotb/code/java/logiKol/app/bin/main/Controllers/UIController.class                | Java            |         37 |          0 |          0 |         37 |
+| /home/kotb/code/java/logiKol/app/bin/main/Gates/AND.class                               | Java            |         12 |          4 |          0 |         16 |
+| /home/kotb/code/java/logiKol/app/bin/main/Gates/BasicGate.class                         | Java            |          4 |          0 |          0 |          4 |
+| /home/kotb/code/java/logiKol/app/bin/main/Gates/Input.class                             | Java            |         20 |          0 |          0 |         20 |
+| /home/kotb/code/java/logiKol/app/bin/main/Gates/NAND.class                              | Java            |         12 |          0 |          0 |         12 |
+| /home/kotb/code/java/logiKol/app/bin/main/Gates/NOR.class                               | Java            |         11 |          0 |          0 |         11 |
+| /home/kotb/code/java/logiKol/app/bin/main/Gates/NOT.class                               | Java            |         18 |          0 |          0 |         18 |
+| /home/kotb/code/java/logiKol/app/bin/main/Gates/Node.class                              | Java            |         22 |          0 |          0 |         22 |
+| /home/kotb/code/java/logiKol/app/bin/main/Gates/OR.class                                | Java            |         15 |          2 |          0 |         17 |
+| /home/kotb/code/java/logiKol/app/bin/main/Gates/XNOR.class                              | Java            |         12 |          0 |          0 |         12 |
+| /home/kotb/code/java/logiKol/app/bin/main/Gates/XOR.class                               | Java            |         11 |          0 |          0 |         11 |
+| /home/kotb/code/java/logiKol/app/bin/main/Providers/TextureProvider.class               | Java            |         18 |          0 |          0 |         18 |
+| /home/kotb/code/java/logiKol/app/bin/main/Providers/UIGateProvider.class                | Java            |         33 |          0 |          0 |         33 |
+| /home/kotb/code/java/logiKol/app/bin/main/UIObjects/BasicGateMultiInUI.class            | Java            |         27 |          2 |          0 |         29 |
+| /home/kotb/code/java/logiKol/app/bin/main/UIObjects/BasicGateSingleInUI.class           | Java            |         25 |          2 |          0 |         27 |
+| /home/kotb/code/java/logiKol/app/bin/main/UIObjects/BasicGateUI.class                   | Java            |         15 |          0 |          0 |         15 |
+| /home/kotb/code/java/logiKol/app/bin/main/UIObjects/BufferNode.class                    | Java            |         28 |          0 |          0 |         28 |
+| /home/kotb/code/java/logiKol/app/bin/main/UIObjects/IONode.class                        | Java            |         31 |          0 |          0 |         31 |
+| /home/kotb/code/java/logiKol/app/bin/main/UIObjects/InNode.class                        | Java            |         38 |          0 |          0 |         38 |
+| /home/kotb/code/java/logiKol/app/bin/main/UIObjects/MoveAbleUI.class                    | Java            |          7 |          0 |          0 |          7 |
+| /home/kotb/code/java/logiKol/app/bin/main/UIObjects/UIObject.class                      | Java            |          8 |          0 |          0 |          8 |
+| /home/kotb/code/java/logiKol/app/bin/main/logiKol.fxml                                  | XML             |         28 |         31 |          5 |         64 |
+| /home/kotb/code/java/logiKol/app/bin/main/logikol/App.class                             | Java            |         69 |          0 |          0 |         69 |
+| /home/kotb/code/java/logiKol/app/bin/main/logikol/MainPane.class                        | Java            |          8 |          0 |          0 |          8 |
+| /home/kotb/code/java/logiKol/app/bin/main/logikol/ToolsPane.class                       | Java            |         18 |          0 |          0 |         18 |
+| /home/kotb/code/java/logiKol/app/bin/main/style.css                                     | CSS             |          9 |          0 |          0 |          9 |
+| /home/kotb/code/java/logiKol/app/bin/test/logikol/AppTest.class                         | Java            |          5 |          0 |          0 |          5 |
+| /home/kotb/code/java/logiKol/app/build.gradle                                           | Groovy          |         21 |         13 |          8 |         42 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Controllers/ConnectLine.java             | Java            |         50 |          0 |         23 |         73 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Controllers/IOConnectionsController.java | Java            |         74 |          0 |         28 |        102 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Controllers/InputHandler.java            | Java            |        224 |          0 |         38 |        262 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Controllers/LogicalGraph.java            | Java            |          3 |          0 |          3 |          6 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Controllers/UIController.java            | Java            |         66 |          4 |         14 |         84 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/AND.java                           | Java            |         51 |          0 |         20 |         71 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/BasicGate.java                     | Java            |          9 |          0 |          3 |         12 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/CompoundGate.java                  | Java            |          6 |         39 |          4 |         49 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/Input.java                         | Java            |         38 |          0 |         16 |         54 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/NAND.java                          | Java            |          7 |          0 |          4 |         11 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/NOR.java                           | Java            |          7 |          0 |          4 |         11 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/NOT.java                           | Java            |         42 |          0 |         18 |         60 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/Node.java                          | Java            |         39 |          0 |         12 |         51 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/OR.java                            | Java            |         53 |          1 |         22 |         76 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/XNOR.java                          | Java            |          7 |          0 |          4 |         11 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Gates/XOR.java                           | Java            |         21 |          5 |         12 |         38 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Providers/TextureProvider.java           | Java            |         44 |          0 |         13 |         57 |
+| /home/kotb/code/java/logiKol/app/src/main/java/Providers/UIGateProvider.java            | Java            |         90 |          0 |         20 |        110 |
+| /home/kotb/code/java/logiKol/app/src/main/java/UIObjects/BasicGateMultiInUI.java        | Java            |         76 |          0 |         26 |        102 |
+| /home/kotb/code/java/logiKol/app/src/main/java/UIObjects/BasicGateSingleInUI.java       | Java            |         71 |          0 |         22 |         93 |
+| /home/kotb/code/java/logiKol/app/src/main/java/UIObjects/BasicGateUI.java               | Java            |         20 |          0 |         11 |         31 |
+| /home/kotb/code/java/logiKol/app/src/main/java/UIObjects/BufferNode.java                | Java            |         61 |          0 |         16 |         77 |
+| /home/kotb/code/java/logiKol/app/src/main/java/UIObjects/IONode.java                    | Java            |         69 |          0 |         22 |         91 |
+| /home/kotb/code/java/logiKol/app/src/main/java/UIObjects/InNode.java                    | Java            |         58 |          0 |         17 |         75 |
+| /home/kotb/code/java/logiKol/app/src/main/java/UIObjects/MoveAbleUI.java                | Java            |         18 |          0 |          9 |         27 |
+| /home/kotb/code/java/logiKol/app/src/main/java/UIObjects/UIObject.java                  | Java            |         12 |          0 |          9 |         21 |
+| /home/kotb/code/java/logiKol/app/src/main/java/logikol/App.java                         | Java            |        108 |         25 |         40 |        173 |
+| /home/kotb/code/java/logiKol/app/src/main/java/logikol/MainPane.java                    | Java            |          9 |          0 |          9 |         18 |
+| /home/kotb/code/java/logiKol/app/src/main/java/logikol/ToolsPane.java                   | Java            |         35 |          0 |         14 |         49 |
+| /home/kotb/code/java/logiKol/app/src/main/resources/logiKol.fxml                        | XML             |         28 |         31 |          5 |         64 |
+| /home/kotb/code/java/logiKol/app/src/main/resources/style.css                           | CSS             |          9 |          0 |          0 |          9 |
+| /home/kotb/code/java/logiKol/app/src/test/java/logikol/AppTest.java                     | Java            |          3 |          3 |          4 |         10 |
+| /home/kotb/code/java/logiKol/gradle/wrapper/gradle-wrapper.properties                   | Java Properties |          5 |          0 |          1 |          6 |
+| /home/kotb/code/java/logiKol/gradlew.bat                                                | Batch           |         70 |          0 |         22 |         92 |
+| /home/kotb/code/java/logiKol/settings.gradle                                            | Groovy          |          2 |          8 |          2 |         12 |
+| Total                                                                                   |                 |      2,210 |        170 |        500 |      2,880 |
++-----------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
