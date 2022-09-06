@@ -1,16 +1,20 @@
 package logikol;
 
 
-import javafx.scene.layout.BorderPane;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 public class MainPane {
 
 
-    public BorderPane pane;
-    public MainPane() 
+    public Pane pane;
+    public MainPane(Scene scene, String paneId) 
     {
-        this.pane = new BorderPane();
-
+        this.pane = (Pane)scene.lookup("#".concat(paneId));
+    }
+    public Pane getLayout()
+    {
+        return this.pane;
     }
 
 

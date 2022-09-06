@@ -3,11 +3,9 @@ package Providers;
 import Gates.AND;
 import Gates.BasicGate;
 import Gates.Input;
-import Gates.NOR;
 import Gates.NOT;
 import Gates.Node;
 import Gates.OR;
-import UIObjects.BufferNode;
 
 public class GateProvider {
     
@@ -33,22 +31,22 @@ public class GateProvider {
         {
             gate = gate.toLowerCase();
         }
-        switch(gate)
+        switch(gate.toLowerCase())
         {
-            case "and" : {
+            case "g-and" : {
 
                 return new AND();
             } 
-            case "or" : {
+            case "g-or" : {
                 return new OR();
             }
-            case "not" : {
+            case "g-not" : {
                 return new NOT();
             }
-            case "io" : { 
+            case "g-out" : { 
                 return new Node();
             }
-            case "in" : {
+            case "g-in" : {
                 return new Input();
             }
             default: break;

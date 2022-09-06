@@ -1,48 +1,49 @@
 package logikol;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+import java.util.HashMap;
+import java.util.Map;
 
-
-
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 
 public class ToolsPane {
-    private Label label;
-    private VBox toolsBox;
+
+
+    private ScrollPane toolsPane;
+    private AnchorPane anchorPane;
+    private Map<String, Node> nodesMap;
     
-    public ToolsPane(String label)
-    {
-        this.label = new Label(label);
-        this.label.setFont(new Font(30));
-        this.toolsBox = new VBox(10);
-        this.toolsBox.getChildren().add(this.label);
-        
-    }
-
     
-
-    public void setWidth(double value)
+    public ToolsPane(Scene scene, String toolsPaneId, String anchorPaneId)
     {
-        this.toolsBox.setPrefWidth(value);
+
+        toolsPane = (ScrollPane)scene.lookup("#".concat(toolsPaneId));
+        anchorPane = (AnchorPane)toolsPane.lookup("#".concat(anchorPaneId));
+        this.nodesMap = new HashMap<>();
+        for(Node node : anchorPane.getChildren())
+        {
+            nodesMap.put(node.getId(), node);
+        }
     }
 
-    public void setBorderColor(Color color)
+
+    public Node getNodeById(String id)
     {
-        this.toolsBox.setBorder(Border.stroke(color));
+        Node node = null;
+        node = nodesMap.get(id);
+        return node;
     }
 
-    public void addButton(String label)
+    public double getLayoutWidth()
     {
-        Button button = new Button(label);
-        this.toolsBox.getChildren().addAll(button);
+        return this.toolsPane.getWidth();
     }
 
-    public VBox getToolsBox()
+    public Map<String, Node> getToolsNodes()
     {
-        return this.toolsBox;
+        return this.nodesMap;
     }
+    
 }

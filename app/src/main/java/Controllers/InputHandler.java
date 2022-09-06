@@ -7,6 +7,7 @@ import UIObjects.BasicGateUI;
 import UIObjects.IONode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 public class InputHandler {
 
@@ -62,7 +63,14 @@ public class InputHandler {
         gate.getOutNode().setOnMouseDragged(e -> {
             if(e.getButton() == MouseButton.SECONDARY)
             {
-                this.handleDrag(gate, e, gate.getOutNode());
+                if(e.getX() > 0)
+                {
+                    this.handleDrag(gate, e, gate.getOutNode());
+                }
+                else
+                {
+                    this.handleRelease(ioConnectionsController, gate, e);
+                }
             }
         });
 
@@ -79,7 +87,14 @@ public class InputHandler {
             node.setOnMouseDragged(e -> {
                 if(e.getButton() == MouseButton.SECONDARY)
                 {
-                    this.handleDrag(gate, e, node);
+                    if(e.getX() > 0)
+                    {
+                        this.handleDrag(gate, e, node);
+                    }
+                    else
+                    {
+                        this.handleRelease(ioConnectionsController, gate, e);
+                    }
                 }
             });
             node.setOnMouseReleased(e -> {
@@ -120,8 +135,16 @@ public class InputHandler {
         gate.getOutNode().setOnMouseDragged(e -> {
             if(e.getButton() == MouseButton.SECONDARY)
             {
-                this.handleDrag(gate, e, gate.getOutNode());
+                if(e.getX() > 0)
+                {
+                    this.handleDrag(gate, e, gate.getOutNode());
+                }
+                else
+                {
+                    this.handleRelease(ioConnectionsController, gate, e);
+                }
             }
+            
         });
 
         gate.getOutNode().setOnMouseReleased(e -> {
@@ -134,9 +157,17 @@ public class InputHandler {
         for(IONode node : gate.getInNodes())
         {
             node.setOnMouseDragged(e -> {
+
                 if(e.getButton() == MouseButton.SECONDARY)
                 {
-                    this.handleDrag(gate, e, node);
+                    if(e.getX() > 0)
+                    {
+                        this.handleDrag(gate, e, node);
+                    }
+                    else   
+                    {
+                        this.handleRelease(ioConnectionsController, gate, e);
+                    }
                 }
             });
             node.setOnMouseReleased(e -> {
@@ -148,9 +179,8 @@ public class InputHandler {
         }
     }
 
-    public void handleBufferNode(IOConnectionsController ioConnectionsController, BasicGateUI gate)
+    public void handleBufferNode(IOConnectionsController ioConnectionsController, LogicalGraph logicalGraph, BasicGateUI gate)
     {
-        System.out.println("lol");
 
         gate.setOnMouseDragged(e -> {
             if(e.getButton() == MouseButton.PRIMARY)
@@ -174,13 +204,13 @@ public class InputHandler {
             }
         });
 
-         gate.getOutNode().node.setOnMouseReleased(e -> {
+        gate.getOutNode().node.setOnMouseReleased(e -> {
 
             if(e.getButton() == MouseButton.SECONDARY)
             {
                 this.handleRelease(ioConnectionsController, gate, e);
             }
-            
+        
         });
 
         for(IONode node : gate.getInNodes())
@@ -193,7 +223,15 @@ public class InputHandler {
                     this.handleRelease(ioConnectionsController, gate, e);
                 }
             });
+            return;
         }
+        gate.getOutNode().node.setOnMouseClicked(e -> {
+            if(e.getButton() == MouseButton.PRIMARY)
+            {
+                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                logicalGraph.flipInputValue(gate);
+            }
+        });
     }
 
     private void handleIONodesLines(IOConnectionsController ioConnectionsController, BasicGateUI gate)

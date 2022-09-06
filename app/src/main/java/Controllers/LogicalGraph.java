@@ -8,6 +8,7 @@ import java.util.Set;
 import Gates.BasicGate;
 import UIObjects.BasicGateUI;
 import UIObjects.IONode;
+import javafx.scene.paint.Color;
 
 public class LogicalGraph {
 
@@ -30,7 +31,18 @@ public class LogicalGraph {
         BasicGate inGate = this.graph.getForward(inNode.getGate());
 
         inGate.addIn(outGate);
-
+    }
+    public void flipInputValue(BasicGateUI gateUI)
+    {
+        BasicGate gate = this.graph.getForward(gateUI);
+        gate.update();
+        boolean value = gate.process();
+        Color color = Color.RED;
+        if(value)
+        {
+            color = Color.GREEN;
+        } 
+        gateUI.getOutNode().node.setFill(color);
     }
 
     public void addBufferNode(BasicGate gate)

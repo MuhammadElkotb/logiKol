@@ -2,30 +2,29 @@ package Controllers;
 
 import Gates.BasicGate;
 import UIObjects.BasicGateUI;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-public class UIController {
 
-    private static UIController instance = null;
+
+public class GateMounter {
+
+    private static GateMounter instance = null;
     private InputHandler inputHandler = null;
     private IOConnectionsController ioConnectionsController = null;
     private LogicalGraph logicalGraph = null;
 
     
-    private UIController(InputHandler inputHandler, IOConnectionsController ioConnectionsController, LogicalGraph logicalGraph)
+    private GateMounter(InputHandler inputHandler, IOConnectionsController ioConnectionsController, LogicalGraph logicalGraph)
     {
         this.inputHandler = inputHandler;
         this.ioConnectionsController = ioConnectionsController;
         this.logicalGraph = logicalGraph;
 
     }
-    public static UIController getInstnace(InputHandler inputHandler, IOConnectionsController ioConnectionsController, LogicalGraph logicalGraph)
+    public static GateMounter getInstnace(InputHandler inputHandler, IOConnectionsController ioConnectionsController, LogicalGraph logicalGraph)
     {
         if(instance == null)
         {
-            instance = new UIController(inputHandler, ioConnectionsController, logicalGraph);
+            instance = new GateMounter(inputHandler, ioConnectionsController, logicalGraph);
         }
         return instance;
     }
@@ -36,7 +35,16 @@ public class UIController {
         gate.getOutNode().move(x + gate.getWidth(), y + gate.getHeight() / 2 + 0.3);
     } 
 
-    public void mountBasicMultiInGateUI(Pane root, BasicGateUI gateUI, BasicGate gate, double x, double y)
+    public void mouneGate(String gateId, Pane root, BasicGateUI gateUI, BasicGate gate, double x, double y)
+    {
+        if(gateId.toLowerCase().equals("g-and")) this.mountBasicMultiInGateUI(root, gateUI, gate, x, y);
+        if(gateId.toLowerCase().equals("g-or")) this.mountBasicMultiInGateUI(root, gateUI, gate, x, y);
+        if(gateId.toLowerCase().equals("g-not")) this.mountBasicSingleInGateUI(root, gateUI, gate, x, y);
+        if(gateId.toLowerCase().equals("g-in")) this.mountInNode(root, gateUI, gate, x, y);
+        if(gateId.toLowerCase().equals("g-out")) this.mountBufferNode(root, gateUI, gate, x, y);
+        
+    }
+    private void mountBasicMultiInGateUI(Pane root, BasicGateUI gateUI, BasicGate gate, double x, double y)
     {
         gateUI.setRoot(root);
         gateUI.move(x, y);
@@ -51,7 +59,7 @@ public class UIController {
         this.inputHandler.handleBasicGateMultiInInput(this.ioConnectionsController, gateUI);
         this.logicalGraph.pairGate(gateUI, gate);
     }
-    public void mountBasicSingleInGateUI(Pane root, BasicGateUI gateUI, BasicGate gate, double x, double y)
+    private void mountBasicSingleInGateUI(Pane root, BasicGateUI gateUI, BasicGate gate, double x, double y)
     {
         gateUI.setRoot(root);
         gateUI.move(x, y);
@@ -65,41 +73,25 @@ public class UIController {
 
 
     }
-    public void mountBufferNode(Pane root, BasicGateUI gateUI, BasicGate gate, double x, double y)
+    private void mountBufferNode(Pane root, BasicGateUI gateUI, BasicGate gate, double x, double y)
     {
         gateUI.setRoot(root);
         gateUI.move(x, y);
         gateUI.getOutNode().move(x, y);
         this.ioConnectionsController.addIoNode(gateUI.getOutNode());
-        this.inputHandler.handleBufferNode(this.ioConnectionsController, gateUI);
+        this.inputHandler.handleBufferNode(this.ioConnectionsController, this.logicalGraph, gateUI);
         this.logicalGraph.pairGate(gateUI, gate);
         this.logicalGraph.addBufferNode(gate);
 
-
     }
-    public void mountInNode(Pane root, BasicGateUI gateUI, BasicGate gate, double x, double y)
+    private void mountInNode(Pane root, BasicGateUI gateUI, BasicGate gate, double x, double y)
     {
         gateUI.setRoot(root);
         gateUI.move(x, y);
         gateUI.getOutNode().move(x, y);
         this.ioConnectionsController.addOutNode(gateUI.getOutNode());
-        this.inputHandler.handleBufferNode(ioConnectionsController, gateUI);
+        this.inputHandler.handleBufferNode(ioConnectionsController, this.logicalGraph, gateUI);
         this.logicalGraph.pairGate(gateUI, gate);
-        gateUI.getOutNode().node.setOnMouseClicked(e -> {
-            if(e.getButton() == MouseButton.PRIMARY)
-            {
-                this.logicalGraph.getGraph().getForward(gateUI).update();
-                boolean value = gate.process();
-                if(value)
-                {
-                    gateUI.getOutNode().node.setFill(Color.GREEN);
-                }
-                else
-                {
-                    gateUI.getOutNode().node.setFill(Color.RED);
-                }
-            }
-        });
-
+        
     }
 }

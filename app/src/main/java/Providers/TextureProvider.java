@@ -8,6 +8,11 @@ public class TextureProvider {
 
     private static TextureProvider instance = null;
 
+    private Image ANDGate = null;
+    private Image ORGate = null;
+    private Image NOTGate = null;
+
+
     private TextureProvider()
     {
 
@@ -21,12 +26,21 @@ public class TextureProvider {
         return instance;
     }
 
-    private Image ANDGate = null;
-    private Image ORGate = null;
-    private Image NOTGate = null;
 
+    public ImageView getTexture(String gate) throws Exception
+    {
+        switch(gate.toLowerCase())
+        {
+            case "g-and" : return this.getANDGateTexture();
+            case "g-or" : return this.getORGateTexture();
+            case "g-not" : return this.getNOTGateTexture();
+            default : return null;
+        }
+    }
 
-    public ImageView getANDGateTexture()
+    
+
+    private ImageView getANDGateTexture()
     {
         if(ANDGate == null)
         {
@@ -35,7 +49,7 @@ public class TextureProvider {
         return new ImageView(ANDGate);
     }
     
-    public ImageView getORGateTexture()
+    private ImageView getORGateTexture()
     {
         if(ORGate == null)
         {
@@ -45,7 +59,7 @@ public class TextureProvider {
     }
 
 
-    public ImageView getNOTGateTexture()
+    private ImageView getNOTGateTexture()
     {
         if(NOTGate == null)
         {
@@ -53,4 +67,7 @@ public class TextureProvider {
         }
         return new ImageView(NOTGate);
     }
+
+
+
 }

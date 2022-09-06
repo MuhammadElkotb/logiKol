@@ -39,9 +39,9 @@ public class UIGateProvider {
         {
             gate = gate.toLowerCase();
         }
-        switch(gate)
+        switch(gate.toLowerCase())
         {
-            case "and" : {
+            case "g-and" : {
                 IONode outNode = new IONode();
                 IONode inNode1 = new IONode();
                 IONode inNode2 = new IONode();
@@ -49,7 +49,7 @@ public class UIGateProvider {
                 inNode1.setClassName("ionode-in");
                 inNode2.setClassName("ionode-in");
 
-                ImageView texture = this.textureProvider.getANDGateTexture();
+                ImageView texture = this.textureProvider.getTexture("g-and");
 
                 if(texture == null)
                 {
@@ -58,14 +58,14 @@ public class UIGateProvider {
 
                 return new BasicGateMultiInUI(outNode, inNode1, inNode2, texture);
             } 
-            case "or" : {
+            case "g-or" : {
                 IONode outNode = new IONode();
                 IONode inNode1 = new IONode();
                 IONode inNode2 = new IONode();
                 outNode.setClassName("ionode-out");
                 inNode1.setClassName("ionode-in");
                 inNode2.setClassName("ionode-in");
-                ImageView texture = this.textureProvider.getORGateTexture();
+                ImageView texture = this.textureProvider.getTexture("g-or");
 
                 if(texture == null)
                 {
@@ -74,12 +74,12 @@ public class UIGateProvider {
 
                 return new BasicGateMultiInUI(outNode, inNode1, inNode2, texture);
             }
-            case "not" : {
+            case "g-not" : {
                 IONode outNode = new IONode();
                 IONode inNode = new IONode();
                 outNode.setClassName("ionode-out");
                 inNode.setClassName("ionode-in");
-                ImageView texture = this.textureProvider.getNOTGateTexture();
+                ImageView texture = this.textureProvider.getTexture("g-not");
 
                 if(texture == null)
                 {
@@ -87,12 +87,12 @@ public class UIGateProvider {
                 }
                 return new BasicGateSingleInUI(outNode, inNode, texture);
             }
-            case "io" : { 
+            case "g-out" : { 
                 IONode outNode = new IONode();
                 outNode.node.setFill(Color.RED);
                 return new BufferNode(outNode);
             }
-            case "in" : {
+            case "g-in" : {
                 IONode outNode = new IONode();
                 outNode.node.setFill(Color.RED);
                 outNode.node.setStroke(Color.BLUE);
