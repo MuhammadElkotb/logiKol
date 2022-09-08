@@ -2,7 +2,6 @@ package UIObjects;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
-import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -80,6 +79,11 @@ public class BasicGateMultiInUI extends BasicGateUI {
     public void setOnMouseReleased(EventHandler<MouseEvent> eventHandler)
     {
         this.texture.setOnMouseReleased(eventHandler);
+    }
+
+    public void setOnMouseClicked(EventHandler<MouseEvent> eventHandler)
+    {
+        this.texture.setOnMouseClicked(eventHandler);
     }
 
 

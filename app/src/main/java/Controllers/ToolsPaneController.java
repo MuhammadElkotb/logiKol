@@ -1,12 +1,14 @@
 package Controllers;
-import Providers.TextureProvider;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import logikol.MainPane;
 import logikol.ToolsPane;
+
 
 public class ToolsPaneController {
 
@@ -74,12 +76,37 @@ public class ToolsPaneController {
         {
             if(node.getId().startsWith("g-"))
             {
-                node.setOnMouseDragged(dragEventHandler);
-                node.setOnMouseReleased(releaseEventHandler);
+                StackPane stackPane = (StackPane)node;
+                for(Node node2 : stackPane.getChildren())
+                {
+
+                    if(!node2.getId().equals("g-back"))
+                    {
+                        node2.setOnMouseDragged(dragEventHandler);
+                        node2.setOnMouseReleased(releaseEventHandler);
+                    }
+                }
+                stackPane.setOnMouseEntered(e -> {
+                    for(Node back : stackPane.getChildren())
+                    {
+                        if(back.getId().equals("g-back"))
+                        {
+                            ((Rectangle)back).setOpacity(1);
+                        }
+                    }
+                });
+                stackPane.setOnMouseExited(e -> {
+                    for(Node back : stackPane.getChildren())
+                    {
+                        if(back.getId().equals("g-back"))
+                        {
+                            ((Rectangle)back).setOpacity(0);
+                        }
+                    }
+                });
             }
             if(node.getId().equals("RUN"))
             {
-                System.out.println("runrunrunrunrun");
                 node.setOnMouseClicked(e -> {
                     this.runner.run();
                 });

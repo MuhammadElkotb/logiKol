@@ -7,27 +7,19 @@ import javafx.scene.layout.Pane;
 
 public class GateMounter {
 
-    private static GateMounter instance = null;
     private InputHandler inputHandler = null;
     private IOConnectionsController ioConnectionsController = null;
     private LogicalGraph logicalGraph = null;
 
     
-    private GateMounter(InputHandler inputHandler, IOConnectionsController ioConnectionsController, LogicalGraph logicalGraph)
+    public GateMounter(InputHandler inputHandler, IOConnectionsController ioConnectionsController, LogicalGraph logicalGraph)
     {
         this.inputHandler = inputHandler;
         this.ioConnectionsController = ioConnectionsController;
         this.logicalGraph = logicalGraph;
 
     }
-    public static GateMounter getInstnace(InputHandler inputHandler, IOConnectionsController ioConnectionsController, LogicalGraph logicalGraph)
-    {
-        if(instance == null)
-        {
-            instance = new GateMounter(inputHandler, ioConnectionsController, logicalGraph);
-        }
-        return instance;
-    }
+   
     
     public void moveGateUI(BasicGateUI gate, double x, double y)
     {

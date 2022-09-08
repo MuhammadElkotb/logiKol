@@ -1,39 +1,35 @@
 package Controllers;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import UIObjects.BasicGateUI;
 import UIObjects.IONode;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 public class InputHandler {
 
 
-    private static InputHandler instance = null;
     private ConnectLine line = null;
     private IONode outNodetemp = null;
     private boolean dragging = false;
+    private GateDeleter gateDeleter;
 
 
-    private InputHandler()
+    public InputHandler(GateDeleter gateDeleter)
     {
-
+        this.gateDeleter = gateDeleter;
     }
-    public static InputHandler getInstance()
-    {
-        if(instance == null)
-        {
-            instance = new InputHandler();
-        }
-        return instance;
-    }
+   
 
     public void handleBasicGateMultiInInput(IOConnectionsController ioConnectionsController, BasicGateUI gate)
     {
         gate.setOnMouseDragged(e -> {
+
+
             if(e.getButton() == MouseButton.PRIMARY)
             {
                 double x = e.getX() - gate.getWidth() / 2;
@@ -104,12 +100,21 @@ public class InputHandler {
                 }
             });
         }
+
+
+        gate.setOnMouseClicked(e -> {
+            if(e.getButton() == MouseButton.SECONDARY)
+            {
+                this.handleRightClick(ioConnectionsController, gate, e);
+            }
+        });
     }
 
 
     public void handleBasicSingleInInput(IOConnectionsController ioConnectionsController, BasicGateUI gate)
     {
         gate.setOnMouseDragged(e -> {
+
 
             if(e.getButton() == MouseButton.PRIMARY)
             {
@@ -177,12 +182,20 @@ public class InputHandler {
                 }
             });
         }
+
+        gate.setOnMouseClicked(e -> {
+            if(e.getButton() == MouseButton.SECONDARY)
+            {
+                this.handleRightClick(ioConnectionsController, gate, e);
+            }
+        });
     }
 
     public void handleBufferNode(IOConnectionsController ioConnectionsController, LogicalGraph logicalGraph, BasicGateUI gate)
     {
 
         gate.setOnMouseDragged(e -> {
+
             if(e.getButton() == MouseButton.PRIMARY)
             {
                 double x = e.getX();
@@ -213,6 +226,7 @@ public class InputHandler {
         
         });
 
+       
         for(IONode node : gate.getInNodes())
         {
 
@@ -223,24 +237,34 @@ public class InputHandler {
                     this.handleRelease(ioConnectionsController, gate, e);
                 }
             });
+            gate.setOnMouseClicked(e -> {
+                if(e.getButton() == MouseButton.SECONDARY)
+                {
+                    this.handleRightClick(ioConnectionsController, gate, e);
+                }
+            });
             return;
+            
         }
         gate.getOutNode().node.setOnMouseClicked(e -> {
             if(e.getButton() == MouseButton.PRIMARY)
             {
-                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 logicalGraph.flipInputValue(gate);
+            }
+            if(e.getButton() == MouseButton.SECONDARY)
+            {
+                this.handleRightClick(ioConnectionsController, gate, e);
             }
         });
     }
 
     private void handleIONodesLines(IOConnectionsController ioConnectionsController, BasicGateUI gate)
     {
-        Map<IONode, List<ConnectLine>> outNodesLinesMap = ioConnectionsController.getOutNodesLinesMap();
+        Map<IONode, Set<ConnectLine>> outNodesLinesMap = ioConnectionsController.getOutNodesLinesMap();
         Map<IONode, ConnectLine> inNodesLinesMap = ioConnectionsController.getInNodesLinesMap();
 
         IONode outNode = gate.getOutNode();
-        List<ConnectLine> outLines = outNodesLinesMap.get(outNode);
+        Set<ConnectLine> outLines = outNodesLinesMap.get(outNode);
         if(outLines != null)
         {
             for(ConnectLine outLine : outLines)
@@ -298,5 +322,60 @@ public class InputHandler {
             outNodetemp = null;
         }
     }
+
+    
+    private void handleRightClick(IOConnectionsController ioConnectionsController, BasicGateUI gate, MouseEvent e)
+    {
+
+        ContextMenu menu = new ContextMenu();
+        MenuItem delete = new MenuItem("Delete");
+        MenuItem removeFirstInput = new MenuItem("Remove Input 1");
+        MenuItem removeSecondInput = new MenuItem("Remove Input 2");
+
+        delete.setOnAction(event -> {
+            this.gateDeleter.deleteGate(gate, ioConnectionsController);
+            menu.hide();
+        });
+
+
+        if(gate.getInNodes().length > 0)
+        {
+            removeFirstInput.setOnAction(event -> {
+                this.gateDeleter.removeInputNode(gate.getInNodes()[0], ioConnectionsController);
+            });
+            removeSecondInput.setOnAction(event -> {
+                this.gateDeleter.removeInputNode(gate.getInNodes()[1], ioConnectionsController);
+            });
+    
+            if(!ioConnectionsController.getInNodesLinesMap().containsKey(gate.getInNodes()[0]))
+            {
+                removeFirstInput.setDisable(true);
+            }
+            if(gate.getInNodes().length > 1)
+            {
+                if(!ioConnectionsController.getInNodesLinesMap().containsKey(gate.getInNodes()[1]))
+                {
+                    removeSecondInput.setDisable(true);
+                }
+            }
+            else
+            {
+                removeSecondInput.setDisable(true);
+            }
+        }
+        else    
+        {
+            removeFirstInput.setVisible(false);
+            removeSecondInput.setVisible(false);
+        }
+       
+        
+        
+        
+        menu.getItems().addAll(delete, removeFirstInput, removeSecondInput);
+        menu.show(gate.getRoot().getScene().getWindow(), e.getScreenX(), e.getScreenY());
+
+    }
+
 
 }

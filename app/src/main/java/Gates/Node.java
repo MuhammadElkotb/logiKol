@@ -1,27 +1,28 @@
 package Gates;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Node implements BasicGate {
 
-    private BasicGate in;
-    public Node(){
-
+    private List<BasicGate> in;
+    public Node()
+    {
+        this.in = new ArrayList<>();
     }
     public Node(BasicGate gate)
     {
-        this.in = gate;
+        this.in = new ArrayList<>();
+        this.in.add(gate);
     }
 
    
     public boolean process()
     {
-        if(this.in == null) {
+        if(this.in.size() == 0) {
             return false;
         }
-        boolean out = this.in.process();
+        boolean out = this.in.get(0).process();
         return out;    
     }
 
@@ -29,22 +30,29 @@ public class Node implements BasicGate {
     {
         if(args.length > 0)
         {
-            this.in = args[0];
+            this.in.clear();
+            this.in.add(args[0]);
         }
     }
 
     public List<BasicGate> getIn()
     {
-        return new ArrayList<BasicGate>(Arrays.asList(this.in));
+        return this.in;
     }
     public void addIn(BasicGate gate)
     {
-        this.in = gate;
+        this.in.clear();
+        this.in.add(gate);
     }
 
     public void update()
     {
         
+    }
+
+    public void removeIn(BasicGate gate)
+    {
+        this.in.remove(gate);
     }
 
 }

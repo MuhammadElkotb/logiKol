@@ -9,15 +9,24 @@ public class BiMap<K extends Object, V extends Object> {
     private Map<V,K> backward = new HashMap<V, K>();
   
     public void put(K key, V value) {
-      forward.put(key, value);
-      backward.put(value, key);
+		forward.put(key, value);
+		backward.put(value, key);
     }
   
     public V getForward(K key) {
-      return forward.get(key);
+      	return forward.get(key);
     }
   
     public K getBackward(V key) {
-      return backward.get(key);
+		return backward.get(key);
     }
+
+    public void deleteBackward(V key)
+    {
+		this.backward.remove(key);
+    }
+	public void deleteForward(K key)
+	{
+		this.forward.remove(key);
+	}
 }

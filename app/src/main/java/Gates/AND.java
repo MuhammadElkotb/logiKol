@@ -7,7 +7,6 @@ public class AND implements BasicGate {
 
 
     private List<BasicGate> in;
-
     public AND()
     {
         this.in = new ArrayList<BasicGate>();
@@ -56,9 +55,15 @@ public class AND implements BasicGate {
         this.in.add(gate);
     }
 
+  
     public void update()
     {
         
+    }
+
+    public void removeIn(BasicGate gate)
+    {
+        this.in.remove(gate);
     }
 
 

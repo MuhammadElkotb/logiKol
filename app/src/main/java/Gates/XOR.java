@@ -4,6 +4,8 @@ import java.util.List;
 
 public class XOR implements BasicGate {
 
+
+    private BasicGate out;
     @Override
     public boolean process() {
         // TODO Auto-generated method stub
@@ -32,6 +34,10 @@ public class XOR implements BasicGate {
     public void update() {
         // TODO Auto-generated method stub
         
+    }
+
+    public void removeIn(BasicGate gate)
+    {
     }
     
 }

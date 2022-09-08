@@ -1,8 +1,6 @@
 package Controllers;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import Gates.BasicGate;
@@ -29,8 +27,29 @@ public class LogicalGraph {
     {
         BasicGate outGate = this.graph.getForward(outNode.getGate());
         BasicGate inGate = this.graph.getForward(inNode.getGate());
-
         inGate.addIn(outGate);
+    }
+
+    public void removeGate(BasicGate gate)
+    {
+        BasicGateUI gateUI = this.graph.getBackward(gate);
+        this.graph.deleteBackward(gate);
+        this.graph.deleteForward(gateUI);
+        this.bufferNodes.remove(gate);
+    }
+
+    public void removeGate(BasicGateUI gateUI)
+    {
+        BasicGate gate = this.graph.getForward(gateUI);
+        this.graph.deleteBackward(gate);
+        this.graph.deleteForward(gateUI);
+    }
+
+    public void disconnect(IONode inNode, IONode outNode)
+    {
+        BasicGate outGate = this.graph.getForward(outNode.getGate());
+        BasicGate inGate = this.graph.getForward(inNode.getGate());
+        inGate.getIn().remove(outGate);
     }
     public void flipInputValue(BasicGateUI gateUI)
     {

@@ -58,6 +58,11 @@ public class BufferNode extends BasicGateUI {
         this.outNode.setOnMouseReleased(eventHandler);
     }
 
+    public void setOnMouseClicked(EventHandler<MouseEvent> eventHandler)
+    {
+        this.outNode.setOnMouseClicked(eventHandler);
+    }
+
     public double getX()
     {
         return this.outNode.node.getCenterX();

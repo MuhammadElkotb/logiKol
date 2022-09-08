@@ -70,6 +70,11 @@ public class BasicGateSingleInUI extends BasicGateUI {
         this.texture.setOnMouseReleased(eventHandler);
     }
 
+    public void setOnMouseClicked(EventHandler<MouseEvent> eventHandler)
+    {
+        this.texture.setOnMouseClicked(eventHandler);
+    }
+
     public double getX()
     {
         return this.texture.getX();

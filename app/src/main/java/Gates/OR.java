@@ -27,9 +27,6 @@ public class OR implements BasicGate{
     @Override
     public boolean process()
     {
-
-        //if(this.processed) return this.getValue();
-
         if(this.in.size() == 0) 
         {
             return false;
@@ -70,6 +67,12 @@ public class OR implements BasicGate{
         
     }
 
+    public void removeIn(BasicGate gate)
+    {
+        this.in.remove(gate);
+    }
+
+   
 
     
 }

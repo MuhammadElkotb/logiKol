@@ -21,10 +21,8 @@ public class Runner {
     }
     public void run()
     {
-        System.out.println("run");
         for(BasicGate gate : logicalGraph.getBufferNodes())
         {
-            System.out.println("xrunwandansdnasdsd");
             boolean value = gate.process();
             Color color = Color.RED;
             if(value) color = Color.GREEN;
