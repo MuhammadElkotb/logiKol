@@ -1,5 +1,7 @@
 package Controllers;
 
+import java.util.Set;
+
 import UIObjects.BasicGateUI;
 import UIObjects.IONode;
 
@@ -17,9 +19,14 @@ public class GateDeleter {
     public void deleteGate(BasicGateUI gateUI, IOConnectionsController ioConnectionsController)
     {
 
-        for(IONode inNode : ioConnectionsController.getOutInNodesMap().get(gateUI.getOutNode()))
+        Set<IONode> inNodes = ioConnectionsController.getOutInNodesMap().get(gateUI.getOutNode());
+
+        if(inNodes != null)
         {
-            this.logicalGraph.disconnect(inNode, gateUI.getOutNode());
+            for(IONode inNode : inNodes)
+            {
+                this.logicalGraph.disconnect(inNode, gateUI.getOutNode());
+            }
         }
 
         ioConnectionsController.deleteOutNode(gateUI.getOutNode());
