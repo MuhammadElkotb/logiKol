@@ -10,11 +10,10 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "problemMatcher": [
-            ],
+            "problemMatcher": [],
             "group": {
-                "isDefault": true,
-                "kind": "build"
+                "kind": "build",
+                "isDefault": true
             },
             "presentation": {
                 "clear": true,

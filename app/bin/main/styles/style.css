@@ -1,9 +1,0 @@
-.ionode-out {
-    -fx-fill:rgb(15, 77, 192);
-}
-.ionode-in {
-    -fx-fill:rgb(102, 233, 90)
-}
-.ionode-in:hover {
-    -fx-fill:white
-}
