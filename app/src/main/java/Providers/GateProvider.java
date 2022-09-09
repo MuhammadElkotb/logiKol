@@ -3,9 +3,12 @@ package Providers;
 import Gates.AND;
 import Gates.BasicGate;
 import Gates.Input;
+import Gates.NAND;
+import Gates.NOR;
 import Gates.NOT;
 import Gates.Node;
 import Gates.OR;
+import Gates.XOR;
 
 public class GateProvider {
     
@@ -42,6 +45,15 @@ public class GateProvider {
             }
             case "g-not" : {
                 return new NOT();
+            }
+            case "g-xor" : {
+                return new XOR();
+            }
+            case "g-nand" : {
+                return new NAND();
+            }
+            case "g-nor" : {
+                return new NOR();
             }
             case "g-out" : { 
                 return new Node();

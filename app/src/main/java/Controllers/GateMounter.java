@@ -33,6 +33,9 @@ public class GateMounter {
         if(gateId.toLowerCase().equals("g-or")) this.mountBasicMultiInGateUI(root, gateUI, gate, x, y);
         if(gateId.toLowerCase().equals("g-not")) this.mountBasicSingleInGateUI(root, gateUI, gate, x, y);
         if(gateId.toLowerCase().equals("g-in")) this.mountInNode(root, gateUI, gate, x, y);
+        if(gateId.toLowerCase().equals("g-xor")) this.mountBasicMultiInGateUI(root, gateUI, gate, x, y);
+        if(gateId.toLowerCase().equals("g-nand")) this.mountBasicMultiInGateUI(root, gateUI, gate, x, y);
+        if(gateId.toLowerCase().equals("g-nor")) this.mountBasicMultiInGateUI(root, gateUI, gate, x, y);
         if(gateId.toLowerCase().equals("g-out")) this.mountBufferNode(root, gateUI, gate, x, y);
         
     }

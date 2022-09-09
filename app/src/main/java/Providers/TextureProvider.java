@@ -11,7 +11,9 @@ public class TextureProvider {
     private Image ANDGate = null;
     private Image ORGate = null;
     private Image NOTGate = null;
-
+    private Image XORGate = null;
+    private Image NANDGate = null;
+    private Image NORGate = null;
 
     private TextureProvider()
     {
@@ -34,6 +36,10 @@ public class TextureProvider {
             case "g-and" : return this.getANDGateTexture();
             case "g-or" : return this.getORGateTexture();
             case "g-not" : return this.getNOTGateTexture();
+            case "g-xor" : return this.getXORGateTexture();
+            case "g-nand" : return this.getNANDGateTexture();
+            case "g-nor" : return this.getNORGateTexture();
+
             default : return null;
         }
     }
@@ -66,6 +72,33 @@ public class TextureProvider {
             NOTGate = new Image("notnew1.png");
         }
         return new ImageView(NOTGate);
+    }
+
+    private ImageView getXORGateTexture()
+    {
+        if(XORGate == null)
+        {
+            XORGate = new Image("xor.png");
+        }
+        return new ImageView(XORGate);
+    }
+
+    private ImageView getNANDGateTexture()
+    {
+        if(NANDGate == null)
+        {
+            NANDGate = new Image("nand.png");
+        }
+        return new ImageView(NANDGate);
+    }
+
+    private ImageView getNORGateTexture()
+    {
+        if(NORGate == null)
+        {
+            NORGate = new Image("nor.png");
+        }
+        return new ImageView(NORGate);
     }
 
 

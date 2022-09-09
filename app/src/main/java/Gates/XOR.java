@@ -1,43 +1,66 @@
 package Gates;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class XOR implements BasicGate {
 
 
-    private BasicGate out;
+
+    private List<BasicGate> in;
+
+
+    public XOR()
+    {
+        this.in = new ArrayList<>();
+    }
+    public XOR(BasicGate... args)
+    {
+        this.in = new ArrayList<>();
+        for(BasicGate arg : args)
+        {
+            this.in.add(arg);
+        }
+    }
     @Override
     public boolean process() {
-        // TODO Auto-generated method stub
+        int ctr = 0;
+        for(BasicGate gate : this.in)
+        {
+            ctr = ctr + (gate.process() ? 1 : 0);
+        }
+        if(ctr % 2 == 1) return true;
         return false;
     }
 
     @Override
     public void setIn(BasicGate... args) {
-        // TODO Auto-generated method stub
-        
+        this.in.clear();
+        for(BasicGate arg : args)
+        {
+            this.in.add(arg);
+        }
     }
 
     @Override
     public List<BasicGate> getIn() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.in;
     }
 
     @Override
     public void addIn(BasicGate gate) {
-        // TODO Auto-generated method stub
-        
+        this.in.add(gate);
     }
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
         
     }
 
     public void removeIn(BasicGate gate)
     {
+        this.in.remove(gate);
     }
+
     
 }

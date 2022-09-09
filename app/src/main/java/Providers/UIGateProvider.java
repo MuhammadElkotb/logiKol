@@ -7,10 +7,8 @@ import UIObjects.BasicGateUI;
 import UIObjects.BufferNode;
 import UIObjects.IONode;
 import UIObjects.InNode;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeType;
 
 
 public class UIGateProvider {
@@ -86,6 +84,59 @@ public class UIGateProvider {
                     throw new Exception("Cannot find NOT Texture file");
                 }
                 return new BasicGateSingleInUI(outNode, inNode, texture);
+            }
+            case "g-xor" : {
+                IONode outNode = new IONode();
+                IONode inNode1 = new IONode();
+                IONode inNode2 = new IONode();
+
+                outNode.setClassName("ionode-out");
+                inNode1.setClassName("ionode-in");
+                inNode2.setClassName("ionode-in");
+                
+                ImageView texture = this.textureProvider.getTexture("g-xor");
+
+                if(texture == null)
+                {
+                    throw new Exception("Cannot find XOR Texture file");
+                }
+                return new BasicGateMultiInUI(outNode, inNode1, inNode2, texture);
+            }
+            case "g-nand" : {
+                
+                IONode outNode = new IONode();
+                IONode inNode1 = new IONode();
+                IONode inNode2 = new IONode();
+
+                outNode.setClassName("ionode-out");
+                inNode1.setClassName("ionode-in");
+                inNode2.setClassName("ionode-in");
+                
+                ImageView texture = this.textureProvider.getTexture("g-nand");
+
+                if(texture == null)
+                {
+                    throw new Exception("Cannot find NAND Texture file");
+                }
+                return new BasicGateMultiInUI(outNode, inNode1, inNode2, texture);
+            }
+            case "g-nor" : {
+                
+                IONode outNode = new IONode();
+                IONode inNode1 = new IONode();
+                IONode inNode2 = new IONode();
+
+                outNode.setClassName("ionode-out");
+                inNode1.setClassName("ionode-in");
+                inNode2.setClassName("ionode-in");
+                
+                ImageView texture = this.textureProvider.getTexture("g-nor");
+
+                if(texture == null)
+                {
+                    throw new Exception("Cannot find NAND Texture file");
+                }
+                return new BasicGateMultiInUI(outNode, inNode1, inNode2, texture);
             }
             case "g-out" : { 
                 IONode outNode = new IONode();
