@@ -47,8 +47,8 @@ public class ToolsPaneController {
                     root.getChildren().add(tempTexture);
                 }
 
-                tempTexture.setX(e.getSceneX() - toolsPane.getLayoutWidth());
-                tempTexture.setY(e.getSceneY());
+                tempTexture.setX(e.getSceneX() - toolsPane.getLayoutWidth() - tempTexture.getImage().getHeight() / 2);
+                tempTexture.setY(e.getSceneY() - tempTexture.getImage().getHeight() / 2);
             }
 
         };
@@ -61,10 +61,10 @@ public class ToolsPaneController {
                 final String id = tempView.getId();
                 root.getChildren().remove(tempTexture);
                 tempTexture = null;
-                final double x = e.getX() - toolsPane.getLayoutWidth();
+                final double x = e.getX() - toolsPane.getLayoutWidth() + 15;
                 if(x > 0)
                 {
-                    gateCreator.createGate(id, root, x, e.getSceneY());
+                    gateCreator.createGate(id, root, x, e.getSceneY() - 40);
                 }
                
             }

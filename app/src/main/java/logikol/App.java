@@ -46,12 +46,14 @@ public class App extends Application {
             ToolsPane toolsPane = new ToolsPane(scene, "ToolsPane", "AnchorPane");
 
             LogicalGraph logicalGraph = new LogicalGraph();
+
             IOConnectionsController ioConnectionsController = new IOConnectionsController(mainPane.getLayout(), logicalGraph);
 
-            
             GateDeleter gateDeleter = new GateDeleter(logicalGraph, ioConnectionsController);
-            InputHandler inputHandler = new InputHandler(gateDeleter);
 
+            InputHandler inputHandler = new InputHandler(mainPane.getLayout(), gateDeleter);
+
+            ioConnectionsController.setInputHandler(inputHandler);
 
             GateMounter gateMounter = new GateMounter(inputHandler, ioConnectionsController, logicalGraph);
            
@@ -67,9 +69,6 @@ public class App extends Application {
             MenuItem save = new MenuItem("Save");
             file.getItems().add(save);
             menu.getMenus().add(file);
-
-
-
             
 
         }

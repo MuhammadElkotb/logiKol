@@ -9,19 +9,23 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public class InputHandler {
 
 
+    private Pane root = null;
     private ConnectLine line = null;
+    private ConnectCircle circle = null;
     private IONode outNodetemp = null;
     private boolean dragging = false;
     private GateDeleter gateDeleter;
 
 
-    public InputHandler(GateDeleter gateDeleter)
+    public InputHandler(Pane root, GateDeleter gateDeleter)
     {
         this.gateDeleter = gateDeleter;
+        this.root = root;
     }
    
 
@@ -61,11 +65,11 @@ public class InputHandler {
             {
                 if(e.getX() > 0)
                 {
-                    this.handleDrag(gate, e, gate.getOutNode());
+                    this.handleDrag(gate, e, gate.getOutNode(), null, 0);
                 }
                 else
                 {
-                    this.handleRelease(ioConnectionsController, gate, e);
+                    this.handleRelease(ioConnectionsController, gate, e, null);
                 }
             }
         });
@@ -73,7 +77,7 @@ public class InputHandler {
         gate.getOutNode().setOnMouseReleased(e -> {
             if(e.getButton() == MouseButton.SECONDARY)
             {
-                this.handleRelease(ioConnectionsController, gate, e);
+                this.handleRelease(ioConnectionsController, gate, e, null);
             }
 
         });
@@ -85,18 +89,18 @@ public class InputHandler {
                 {
                     if(e.getX() > 0)
                     {
-                        this.handleDrag(gate, e, node);
+                        this.handleDrag(gate, e, node, null, 0);
                     }
                     else
                     {
-                        this.handleRelease(ioConnectionsController, gate, e);
+                        this.handleRelease(ioConnectionsController, gate, e, null);
                     }
                 }
             });
             node.setOnMouseReleased(e -> {
                 if(e.getButton() == MouseButton.SECONDARY)
                 {
-                    this.handleRelease(ioConnectionsController, gate, e);
+                    this.handleRelease(ioConnectionsController, gate, e, null);
                 }
             });
         }
@@ -142,11 +146,11 @@ public class InputHandler {
             {
                 if(e.getX() > 0)
                 {
-                    this.handleDrag(gate, e, gate.getOutNode());
+                    this.handleDrag(gate, e, gate.getOutNode(), null, 0);
                 }
                 else
                 {
-                    this.handleRelease(ioConnectionsController, gate, e);
+                    this.handleRelease(ioConnectionsController, gate, e, null);
                 }
             }
             
@@ -155,7 +159,7 @@ public class InputHandler {
         gate.getOutNode().setOnMouseReleased(e -> {
             if(e.getButton() == MouseButton.SECONDARY)
             {
-                this.handleRelease(ioConnectionsController, gate, e);
+                this.handleRelease(ioConnectionsController, gate, e, null);
             }
         });
 
@@ -167,18 +171,18 @@ public class InputHandler {
                 {
                     if(e.getX() > 0)
                     {
-                        this.handleDrag(gate, e, node);
+                        this.handleDrag(gate, e, node, null, 0);
                     }
                     else   
                     {
-                        this.handleRelease(ioConnectionsController, gate, e);
+                        this.handleRelease(ioConnectionsController, gate, e, null);
                     }
                 }
             });
             node.setOnMouseReleased(e -> {
                 if(e.getButton() == MouseButton.SECONDARY)
                 {
-                    this.handleRelease(ioConnectionsController, gate, e);
+                    this.handleRelease(ioConnectionsController, gate, e, null);
                 }
             });
         }
@@ -213,7 +217,7 @@ public class InputHandler {
             }
             if(e.getButton() == MouseButton.SECONDARY)
             {
-                this.handleDrag(gate, e, gate.getOutNode());
+                this.handleDrag(gate, e, gate.getOutNode(), null, 0);
             }
         });
 
@@ -221,7 +225,7 @@ public class InputHandler {
 
             if(e.getButton() == MouseButton.SECONDARY)
             {
-                this.handleRelease(ioConnectionsController, gate, e);
+                this.handleRelease(ioConnectionsController, gate, e, null);
             }
         
         });
@@ -234,7 +238,7 @@ public class InputHandler {
 
                 if(e.getButton() == MouseButton.SECONDARY)
                 {
-                    this.handleRelease(ioConnectionsController, gate, e);
+                    this.handleRelease(ioConnectionsController, gate, e, null);
                 }
             });
             gate.setOnMouseClicked(e -> {
@@ -269,7 +273,17 @@ public class InputHandler {
         {
             for(ConnectLine outLine : outLines)
             {
+
                 outLine.setLine(outNode.getX(), outNode.getY(), outLine.getEndX(), outLine.getEndY());
+                Set<ConnectLine> connectedLines = ioConnectionsController.getConnectedLinesMap().get(outLine);
+                if(connectedLines != null)
+                {
+                    for(ConnectLine connectedLine : connectedLines)
+                    {
+                        connectedLine.setLine(connectedLine.getEndX(), connectedLine.getEndY());
+                    }
+                }
+                
             }
          
         }
@@ -283,6 +297,19 @@ public class InputHandler {
                 if(inLine != null)
                 {
                     inLine.setLine(inLine.getStartX(), inLine.getStartY(), inNode.getX(), inNode.getY());
+                    Set<ConnectLine> connectedLines = ioConnectionsController.getConnectedLinesMap().get(inLine);
+                    if(connectedLines != null)
+                    {
+                        for(ConnectLine connectedLine : connectedLines)
+                        {
+                            connectedLine.setLine(connectedLine.getEndX(), connectedLine.getEndY());
+                        }
+                    }
+
+                    if(inLine.circleAttached())
+                    {
+                        inLine.setLine(inNode.getX(), inNode.getY());
+                    }
                 } 
             }
         }
@@ -290,36 +317,80 @@ public class InputHandler {
     }
 
 
-    private void handleDrag(BasicGateUI gate, MouseEvent e, IONode node)
+    private void handleDrag(BasicGateUI gate, MouseEvent e, IONode node, ConnectLine connectLine, int lineNumber)
     {
-        if(line == null)
+        if(gate != null)
         {
-            line = new ConnectLine();
-            outNodetemp = node;
-            gate.getRoot().getChildren().addAll(line.getLines());
+            if(line == null)
+            {
+                line = new ConnectLine();
+                outNodetemp = node;
+                gate.getRoot().getChildren().addAll(line.getLines());
+            }
+    
+            line.setLine(node.getX(), node.getY(), e.getX(), e.getY());
         }
+        else
+        {
+            if(line == null)
+            {
+                line = new ConnectLine();
 
-        line.setLine(node.getX(), node.getY(), e.getX(), e.getY());
+                if(circle == null)
+                {
+                    circle = new ConnectCircle(connectLine.getLines()[lineNumber], lineNumber, e.getX(), e.getY());
+                }
+                System.out.println(circle.isLineVertical());
+            System.out.println(lineNumber);
+                this.root.getChildren().addAll(line.getLines());
+                this.root.getChildren().add(circle.getCircle());
+                line.setConnectionCircle(circle);
+            }
+    
+            
+            line.setLine(e.getX(), e.getY());
+        }
+        
         this.dragging = true;
     }
 
-    private void handleRelease(IOConnectionsController ioConnectionsController, BasicGateUI gate, MouseEvent e)
+    private void handleRelease(IOConnectionsController ioConnectionsController, BasicGateUI gate, MouseEvent e, ConnectLine connectLine)
     {
         if(this.dragging)
         {
-            gate.getRoot().getChildren().removeAll(line.getLines());
+            this.root.getChildren().removeAll(line.getLines());
+            
+            if(circle != null)
+            {
+                this.root.getChildren().remove(circle.getCircle());
+            }
+
             for(IONode node : ioConnectionsController.getIoNodes())
             {
                 if(node.node.contains(e.getX(), e.getY()))
                 {
-                    ioConnectionsController.connect(outNodetemp, node);
+                    if(circle == null)
+                    {
+                        ioConnectionsController.connect(outNodetemp, node, null, null);
+                    }
+                    else
+                    {
+                        ConnectCircle newCircle = new ConnectCircle(connectLine.getLines()[circle.getLineNumber()], 
+                                circle.getLineNumber(), circle.getCircle().getCenterX(), circle.getCircle().getCenterY());
+
+                        System.out.println(newCircle.isLineVertical());
+
+                        ioConnectionsController.connect(ioConnectionsController.getLinesIONodesMap().get(connectLine).get(0), node, newCircle, connectLine);
+                    }
                     break;
                 }
             }
 
             this.dragging = false;  
             line = null;
+            circle = null;
             outNodetemp = null;
+
         }
     }
 
@@ -369,12 +440,36 @@ public class InputHandler {
             removeSecondInput.setVisible(false);
         }
        
-        
-        
-        
         menu.getItems().addAll(delete, removeFirstInput, removeSecondInput);
         menu.show(gate.getRoot().getScene().getWindow(), e.getScreenX(), e.getScreenY());
 
+    }
+
+
+    public void handleLinetoNodeConnection(IOConnectionsController ioConnectionsController, ConnectLine line)
+    {
+
+        line.getLines()[0].setOnMouseDragged(e -> {
+            
+            this.handleDrag(null, e, null, line, 0);
+        });
+
+        line.getLines()[1].setOnMouseDragged(e -> {
+            
+            this.handleDrag(null, e, null, line, 1);
+        });
+
+        line.getLines()[0].setOnMouseReleased(e -> {
+            this.handleRelease(ioConnectionsController, null, e, line);
+        });
+
+        line.getLines()[1].setOnMouseReleased(e -> {
+            this.handleRelease(ioConnectionsController, null, e, line);
+        });
+
+        line.setOnMouseClicked(e -> {
+        });
+        
     }
 
 
