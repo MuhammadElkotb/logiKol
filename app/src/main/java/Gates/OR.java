@@ -5,7 +5,7 @@ import java.util.List;
 
 public class OR implements BasicGate{
 
-    private List<BasicGate> in;
+    protected List<BasicGate> in;
 
     public OR()
     {
@@ -27,7 +27,7 @@ public class OR implements BasicGate{
     @Override
     public boolean process()
     {
-        if(this.in.size() == 0) 
+        if(this.in.size() < 2) 
         {
             return false;
         } 

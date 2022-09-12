@@ -21,6 +21,7 @@ public class Runner {
     }
     public void run()
     {
+        System.out.println(logicalGraph.getBufferNodes());
         for(BasicGate gate : logicalGraph.getBufferNodes())
         {
             boolean value = gate.process();

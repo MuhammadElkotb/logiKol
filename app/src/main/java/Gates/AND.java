@@ -6,7 +6,7 @@ import java.util.List;
 public class AND implements BasicGate {
 
 
-    private List<BasicGate> in;
+    protected List<BasicGate> in;
     public AND()
     {
         this.in = new ArrayList<BasicGate>();

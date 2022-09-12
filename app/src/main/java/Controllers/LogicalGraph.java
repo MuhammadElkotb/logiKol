@@ -43,6 +43,8 @@ public class LogicalGraph {
         BasicGate gate = this.graph.getForward(gateUI);
         this.graph.deleteBackward(gate);
         this.graph.deleteForward(gateUI);
+        this.bufferNodes.remove(gate);
+
     }
 
     public void disconnect(IONode inNode, IONode outNode)

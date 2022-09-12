@@ -325,7 +325,8 @@ public class InputHandler {
             {
                 line = new ConnectLine();
                 outNodetemp = node;
-                gate.getRoot().getChildren().addAll(line.getLines());
+                this.root.getChildren().add(0, line.getLines()[0]);
+                this.root.getChildren().add(0, line.getLines()[1]);
             }
     
             line.setLine(node.getX(), node.getY(), e.getX(), e.getY());
@@ -340,10 +341,9 @@ public class InputHandler {
                 {
                     circle = new ConnectCircle(connectLine.getLines()[lineNumber], lineNumber, e.getX(), e.getY());
                 }
-                System.out.println(circle.isLineVertical());
-            System.out.println(lineNumber);
-                this.root.getChildren().addAll(line.getLines());
-                this.root.getChildren().add(circle.getCircle());
+                this.root.getChildren().add(0, line.getLines()[0]);
+                this.root.getChildren().add(0, line.getLines()[1]);
+                this.root.getChildren().add(0, circle.getCircle());
                 line.setConnectionCircle(circle);
             }
     
@@ -465,9 +465,6 @@ public class InputHandler {
 
         line.getLines()[1].setOnMouseReleased(e -> {
             this.handleRelease(ioConnectionsController, null, e, line);
-        });
-
-        line.setOnMouseClicked(e -> {
         });
         
     }

@@ -10,6 +10,7 @@ public class GateDeleter {
     private LogicalGraph logicalGraph;
     private IOConnectionsController ioConnectionsController;
     
+    
     public GateDeleter(LogicalGraph logicalGraph, IOConnectionsController ioConnectionsController)
     {
         this.logicalGraph = logicalGraph;
@@ -18,7 +19,6 @@ public class GateDeleter {
 
     public void deleteGate(BasicGateUI gateUI, IOConnectionsController ioConnectionsController)
     {
-
         Set<IONode> inNodes = ioConnectionsController.getOutInNodesMap().get(gateUI.getOutNode());
 
         if(inNodes != null)
@@ -31,7 +31,6 @@ public class GateDeleter {
 
         ioConnectionsController.deleteOutNode(gateUI.getOutNode());
 
-
         gateUI.getRoot().getChildren().removeAll(gateUI.getTexture(), gateUI.getOutNode().node);
         for(IONode node : gateUI.getInNodes())
         {
@@ -43,12 +42,9 @@ public class GateDeleter {
 
     public void removeInputNode(IONode node, IOConnectionsController ioConnectionsController)
     {
-
         this.logicalGraph.disconnect(node, ioConnectionsController.getInOutNodesMap().get(node));
-        ioConnectionsController.removeInConnection(node);
+        ioConnectionsController.removeConnection(ioConnectionsController.getInNodesLinesMap().get(node));
     }
-
-
 
     
 }

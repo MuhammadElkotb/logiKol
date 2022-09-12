@@ -7,7 +7,7 @@ public class XOR implements BasicGate {
 
 
 
-    private List<BasicGate> in;
+    protected List<BasicGate> in;
 
 
     public XOR()
@@ -24,6 +24,10 @@ public class XOR implements BasicGate {
     }
     @Override
     public boolean process() {
+        if(this.in.size() < 2)
+        {
+            return false;
+        }
         int ctr = 0;
         for(BasicGate gate : this.in)
         {

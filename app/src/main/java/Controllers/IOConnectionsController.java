@@ -298,7 +298,6 @@ public class IOConnectionsController {
 
         this.inputHandler.handleLinetoNodeConnection(this, connectLine);
 
-        System.out.println(this.connectLinesMap);
 
     }
 
@@ -307,74 +306,20 @@ public class IOConnectionsController {
         ConnectLine line = this.inNodesLinesMap.get(node);
         if(line != null)
         {
-            /*this.connectLinesMap.remove(line);
-            this.linesIONodesMap.remove(line);
-            
-            this.root.getChildren().removeAll(line.getLines());
-            
-            for(ConnectCircle circle : line.getConnectionCircles())
-            {
-                this.root.getChildren().remove(circle.getCircle());
-            }
-            if(line.getConnectionCircle() != null)
-            {
-                this.root.getChildren().remove(line.getConnectionCircle().getCircle());
-            }*/
             this.removeConnection(line);
         }
+
         this.ioNodes.remove(node);
-    //    this.inNodesLinesMap.remove(node);
         this.inNodes.remove(node);
-
-       /*  IONode outNode = this.inOutNodesMap.get(node);
-        IONode deleteNode = null;
-
-        if(line != null && outNode != null)
-        {
-            //this.outNodesLinesMap.get(outNode).remove(line);
-
-            for(IONode inNode : this.outInNodesMap.get(outNode))
-            {
-                if(inNode == node)
-                {
-                    deleteNode = inNode;
-                }
-            }
-            if(deleteNode != null)
-            {
-                this.outInNodesMap.get(outNode).remove(deleteNode);
-            }
-        }*/
-
-     //   this.inOutNodesMap.remove(node);
-
 
     }
 
     public void deleteOutNode(IONode node)
     {
-        System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
         Set<ConnectLine> lines = this.outNodesLinesMap.get(node);
         
         if(lines != null)
         {
-            /*for(ConnectLine lineTemp : line)
-            {
-                this.connectLinesMap.remove(lineTemp);
-                this.linesIONodesMap.remove(lineTemp);
-
-                this.root.getChildren().removeAll(lineTemp.getLines());
-                
-                for(ConnectCircle circle : lineTemp.getConnectionCircles())
-                {
-                    this.root.getChildren().remove(circle.getCircle());
-                }
-                if(lineTemp.getConnectionCircle() != null)
-                {
-                    this.root.getChildren().remove(lineTemp.getConnectionCircle().getCircle());
-                }
-            }*/
-
             Iterator<ConnectLine> linesIt = lines.iterator();
 
             while(linesIt.hasNext())
@@ -386,28 +331,12 @@ public class IOConnectionsController {
         }
         
         this.ioNodes.remove(node);
-        //this.outNodesLinesMap.remove(node);
         this.outNodes.remove(node);
 
-
-        /*Set<IONode> inNodes = this.outInNodesMap.get(node);
-
-        if(inNodes != null)
-        {
-            for(IONode inNode : inNodes)
-            {
-                this.inNodesLinesMap.remove(inNode);
-                this.inOutNodesMap.remove(inNode);
-            }
-        }
-
-        this.outInNodesMap.remove(node);*/
-        
     }
 
     public void removeConnection(ConnectLine line)
     {
-        System.out.println("ahahahahahahah");
 
         if(!this.linesIONodesMap.containsKey(line)) return;
 
