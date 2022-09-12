@@ -1,30 +1,29 @@
 package Controllers;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import Gates.BasicGate;
 import javafx.scene.paint.Color;
 
 public class Runner {
 
 
-    private static Runner instance = null;
     private LogicalGraph logicalGraph = null;
 
-    private Runner(LogicalGraph logicalGraph)
+    public Runner(LogicalGraph logicalGraph)
     {
         this.logicalGraph = logicalGraph;
     }
 
-    public static Runner getInstance(LogicalGraph logicalGraph)
-    {
-        if(instance == null) instance = new Runner(logicalGraph);
-        return instance;
-    }
+
     public void run()
     {
         System.out.println(logicalGraph.getBufferNodes());
+        Set<BasicGate> processed = new HashSet<>();
         for(BasicGate gate : logicalGraph.getBufferNodes())
         {
-            boolean value = gate.process();
+            boolean value = gate.process(processed);
             Color color = Color.RED;
             if(value) color = Color.GREEN;
             logicalGraph.getGraph().getBackward(gate).getOutNode().node.setFill(color);

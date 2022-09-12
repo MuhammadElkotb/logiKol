@@ -2,13 +2,14 @@ package Gates;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class XOR implements BasicGate {
 
 
 
     protected List<BasicGate> in;
-
+    protected boolean value;
 
     public XOR()
     {
@@ -23,17 +24,25 @@ public class XOR implements BasicGate {
         }
     }
     @Override
-    public boolean process() {
+    public boolean process(Set<BasicGate> processed) {
+        if(processed == null) return this.value;
+
+        if(processed.contains(this)) return this.value;
         if(this.in.size() < 2)
         {
+            this.value = false;
+            processed.add(this);
             return false;
         }
         int ctr = 0;
+        processed.add(this);
         for(BasicGate gate : this.in)
         {
-            ctr = ctr + (gate.process() ? 1 : 0);
+            ctr = ctr + (gate.process(processed) ? 1 : 0);
         }
-        if(ctr % 2 == 1) return true;
+        if(ctr % 2 == 1){ this.value = true; return true; }
+        this.value = false;
+        processed.add(this);
         return false;
     }
 

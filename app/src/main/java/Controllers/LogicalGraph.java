@@ -12,11 +12,19 @@ public class LogicalGraph {
 
     private BiMap<BasicGateUI, BasicGate> graph;
     private Set<BasicGate> bufferNodes;
-
+    private Set<BasicGate> inputNodes;
+    private Runner runner;
     public LogicalGraph()
     {
         this.graph = new BiMap<>();
         this.bufferNodes = new HashSet<>();
+        this.inputNodes = new HashSet<>();
+    }
+
+    public LogicalGraph(Runner runner)
+    {
+        this();
+        this.runner = runner;
     }
 
     public void pairGate(BasicGateUI gateUI, BasicGate gate)
@@ -57,18 +65,28 @@ public class LogicalGraph {
     {
         BasicGate gate = this.graph.getForward(gateUI);
         gate.update();
-        boolean value = gate.process();
+        boolean value = gate.process(null);
         Color color = Color.RED;
         if(value)
         {
             color = Color.GREEN;
         } 
         gateUI.getOutNode().node.setFill(color);
+        this.runner.run();
     }
 
     public void addBufferNode(BasicGate gate)
     {
         this.bufferNodes.add(gate);
+    }
+
+    public void addInputGate(BasicGate gate)
+    {
+        this.inputNodes.add(gate);
+    }
+    public Set<BasicGate> getInputNodes()
+    {
+        return this.inputNodes;
     }
 
     public Set<BasicGate> getBufferNodes()
@@ -79,6 +97,11 @@ public class LogicalGraph {
     public BiMap<BasicGateUI, BasicGate> getGraph()
     {
         return this.graph;
+    }
+
+    public void setRunner(Runner runner)
+    {
+        this.runner = runner;
     }
 
 }

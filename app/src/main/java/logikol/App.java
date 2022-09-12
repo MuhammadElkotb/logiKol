@@ -23,8 +23,8 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-    int width = 1280;
-    int height = 720;
+    int width = 1600;
+    int height = 900;
 
     @Override
     public void start(Stage stage) {
@@ -44,12 +44,16 @@ public class App extends Application {
             MainPane mainPane = new MainPane(scene, "MainPane");
 
             ToolsPane toolsPane = new ToolsPane(scene, "ToolsPane", "AnchorPane");
-
             LogicalGraph logicalGraph = new LogicalGraph();
 
-            IOConnectionsController ioConnectionsController = new IOConnectionsController(mainPane.getLayout(), logicalGraph);
+            Runner runner = new Runner(logicalGraph);
 
-            GateDeleter gateDeleter = new GateDeleter(logicalGraph, ioConnectionsController);
+            logicalGraph.setRunner(runner);
+
+
+            IOConnectionsController ioConnectionsController = new IOConnectionsController(mainPane.getLayout(), logicalGraph, runner);
+
+            GateDeleter gateDeleter = new GateDeleter(logicalGraph, ioConnectionsController, runner);
 
             InputHandler inputHandler = new InputHandler(mainPane.getLayout(), gateDeleter);
 
@@ -59,7 +63,7 @@ public class App extends Application {
            
             GateCreator gateCreator = new GateCreator(gateMounter, UIGateProvider.getInstnace(TextureProvider.getInstnace()), GateProvider.getInstnace());
            
-            ToolsPaneController toolsPaneController = new ToolsPaneController(toolsPane, gateCreator, Runner.getInstance(logicalGraph));
+            ToolsPaneController toolsPaneController = new ToolsPaneController(toolsPane, gateCreator, runner);
             toolsPaneController.setupToolsPane(mainPane);
             
 

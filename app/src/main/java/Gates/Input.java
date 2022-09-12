@@ -2,6 +2,7 @@ package Gates;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Input implements BasicGate{
     
@@ -26,7 +27,7 @@ public class Input implements BasicGate{
     }
 
 
-    public boolean process()
+    public boolean process(Set<BasicGate> processed)
     {
         return this.value;
     }

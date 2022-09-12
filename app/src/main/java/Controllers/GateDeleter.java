@@ -9,12 +9,14 @@ public class GateDeleter {
 
     private LogicalGraph logicalGraph;
     private IOConnectionsController ioConnectionsController;
+    private Runner runner;
     
     
-    public GateDeleter(LogicalGraph logicalGraph, IOConnectionsController ioConnectionsController)
+    public GateDeleter(LogicalGraph logicalGraph, IOConnectionsController ioConnectionsController, Runner runner)
     {
         this.logicalGraph = logicalGraph;
         this.ioConnectionsController = ioConnectionsController;
+        this.runner = runner;
     }
 
     public void deleteGate(BasicGateUI gateUI, IOConnectionsController ioConnectionsController)
@@ -38,12 +40,14 @@ public class GateDeleter {
             gateUI.getRoot().getChildren().remove(node.node);
         }
         logicalGraph.removeGate(gateUI);
+        this.runner.run();
     }
 
     public void removeInputNode(IONode node, IOConnectionsController ioConnectionsController)
     {
         this.logicalGraph.disconnect(node, ioConnectionsController.getInOutNodesMap().get(node));
         ioConnectionsController.removeConnection(ioConnectionsController.getInNodesLinesMap().get(node));
+        this.runner.run();
     }
 
     

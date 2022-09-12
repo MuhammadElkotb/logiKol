@@ -2,10 +2,12 @@ package Gates;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Node implements BasicGate {
 
     private List<BasicGate> in;
+    private boolean value = false;
     public Node()
     {
         this.in = new ArrayList<>();
@@ -17,12 +19,19 @@ public class Node implements BasicGate {
     }
 
    
-    public boolean process()
+    public boolean process(Set<BasicGate> processed)
     {
-        if(this.in.size() == 0) {
+        if(processed == null) return this.value;
+
+        if(processed.contains(this)) return this.value;
+         if(this.in.size() == 0) {
+            this.value = false;
+            processed.add(this);
             return false;
         }
-        boolean out = this.in.get(0).process();
+        processed.add(this);
+        boolean out = this.in.get(0).process(processed);
+        this.value = out;
         return out;    
     }
 

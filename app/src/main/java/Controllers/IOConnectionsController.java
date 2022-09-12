@@ -26,8 +26,9 @@ public class IOConnectionsController {
     private Map<ConnectLine, List<IONode>> linesIONodesMap;
     private Map<ConnectLine, Set<ConnectLine>> connectLinesMap;
     private LogicalGraph logicalGraph;
+    private Runner runner;
 
-    public IOConnectionsController(Pane root, LogicalGraph logicalGraph)
+    public IOConnectionsController(Pane root, LogicalGraph logicalGraph, Runner runner)
     {
         inNodes = new HashSet<>();
         outNodes = new HashSet<>();
@@ -39,9 +40,8 @@ public class IOConnectionsController {
         inNodesLinesMap = new HashMap<>();
         this.connectLinesMap = new HashMap<>();
         this.logicalGraph = logicalGraph;
-
         this.root = root;
-
+        this.runner = runner;
     }
 
     public void setInputHandler(InputHandler inputHandler)
@@ -298,6 +298,8 @@ public class IOConnectionsController {
 
         this.inputHandler.handleLinetoNodeConnection(this, connectLine);
 
+        this.runner.run();
+
 
     }
 
@@ -311,6 +313,8 @@ public class IOConnectionsController {
 
         this.ioNodes.remove(node);
         this.inNodes.remove(node);
+
+
 
     }
 
@@ -332,6 +336,8 @@ public class IOConnectionsController {
         
         this.ioNodes.remove(node);
         this.outNodes.remove(node);
+
+
 
     }
 
@@ -370,38 +376,6 @@ public class IOConnectionsController {
 
         this.outInNodesMap.get(outNode).remove(inNode);
         this.inOutNodesMap.remove(inNode);
-
-    }
-    public void removeInConnection(IONode node)
-    {
-        ConnectLine line = this.inNodesLinesMap.get(node);
-
-        if(line != null)
-        {
-            this.root.getChildren().removeAll(line.getLines());
-        }
-        this.inNodesLinesMap.remove(node);
-
-        IONode outNode = this.inOutNodesMap.get(node);
-        IONode deleteNode = null;
-        if(line != null && outNode != null)
-        {
-            this.outNodesLinesMap.get(outNode).remove(line);
-
-            for(IONode inNode : this.outInNodesMap.get(outNode))
-            {
-                if(inNode == node)
-                {
-                    deleteNode = inNode;
-                }
-            }
-            if(deleteNode != null)
-            {
-                this.outInNodesMap.get(outNode).remove(deleteNode);
-            }
-
-        }
-        this.inOutNodesMap.remove(node);
 
     }
 

@@ -87,6 +87,7 @@ public class GateMounter {
         this.ioConnectionsController.addOutNode(gateUI.getOutNode());
         this.inputHandler.handleBufferNode(ioConnectionsController, this.logicalGraph, gateUI);
         this.logicalGraph.pairGate(gateUI, gate);
+        this.logicalGraph.addInputGate(gate);
         
     }
 }
