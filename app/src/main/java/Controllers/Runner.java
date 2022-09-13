@@ -10,7 +10,6 @@ public class Runner {
 
 
     private LogicalGraph logicalGraph = null;
-
     public Runner(LogicalGraph logicalGraph)
     {
         this.logicalGraph = logicalGraph;
@@ -23,10 +22,15 @@ public class Runner {
         Set<BasicGate> processed = new HashSet<>();
         for(BasicGate gate : logicalGraph.getBufferNodes())
         {
-            boolean value = gate.process(processed);
-            Color color = Color.RED;
-            if(value) color = Color.GREEN;
-            logicalGraph.getGraph().getBackward(gate).getOutNode().node.setFill(color);
+            if(!processed.contains(gate))
+            {
+                boolean value = gate.process(processed);
+                processed.add(gate);
+                Color color = Color.RED;
+                if(value) color = Color.GREEN;
+                logicalGraph.getGraph().getBackward(gate).getOutNode().node.setFill(color);
+            }
+            
         }
     }
     

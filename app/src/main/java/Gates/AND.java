@@ -9,6 +9,7 @@ public class AND implements BasicGate {
 
     protected List<BasicGate> in;
     protected boolean value = false;
+    protected boolean prevValue;
     public AND()
     {
         this.in = new ArrayList<BasicGate>();
@@ -27,12 +28,16 @@ public class AND implements BasicGate {
     public boolean process(Set<BasicGate> processed)
     {
         if(processed == null) return this.value;
-        if(processed.contains(this)) return this.value;
+        if(processed.contains(this)) 
+        {
+            System.out.println("Processed"); return this.value;
+        }
         if(this.in.size() < 2) {
             processed.add(this);
             this.value = false;
             return false;
         }
+        System.out.println("Processing");
         processed.add(this);
         for(BasicGate arg : this.in)
         {

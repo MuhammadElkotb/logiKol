@@ -8,7 +8,7 @@ public class XNOR extends XOR {
     {
         if(processed == null) return this.value;
 
-        if(processed.contains(this)) return this.value;
+        if(processed.contains(this)) { return this.value;}
         if(this.in.size() < 2)
         {
             this.value = false;

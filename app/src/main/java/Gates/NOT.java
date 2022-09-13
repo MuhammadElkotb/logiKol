@@ -26,7 +26,7 @@ public final class NOT implements BasicGate {
     public boolean process(Set<BasicGate> processed)
     {
         if(processed == null) return this.value;
-        if(processed.contains(this)) return this.value;
+        if(processed.contains(this)) { return this.value;}
         if(this.in.size() == 0) 
         {
             this.value = false;

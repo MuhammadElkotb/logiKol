@@ -23,7 +23,7 @@ public class Node implements BasicGate {
     {
         if(processed == null) return this.value;
 
-        if(processed.contains(this)) return this.value;
+        if(processed.contains(this)){return this.value;}
          if(this.in.size() == 0) {
             this.value = false;
             processed.add(this);
